@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="t1Dw6t" name="Acres Basement Kit" projectType="audioplug"
+              useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
+              jucerFormatVersion="1" version="0.0.1" companyWebsite="www.jaulrecords.com"
+              companyName="Jaul Records" companyCopyright="2022" companyEmail="studio@jaulrecords.com"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+  <MAINGROUP id="KeEiJ1" name="Acres Basement Kit">
+    <GROUP id="{63373324-B844-4169-6047-6FC1761960A4}" name="Samples">
+      <GROUP id="{91D398C1-BD27-7B73-9500-647542423407}" name="acoustic-snare">
+        <FILE id="hNL1aS" name="acoustic-snare-floortom-mic.wav" compile="0"
+              resource="1" file="Samples/acoustic-snare/acoustic-snare-floortom-mic.wav"/>
+        <FILE id="iXV90i" name="acoustic-snare-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/acoustic-snare/acoustic-snare-hihat-mic.wav"/>
+        <FILE id="ir5N4P" name="acoustic-snare-kick-mic.wav" compile="0" resource="1"
+              file="Samples/acoustic-snare/acoustic-snare-kick-mic.wav"/>
+        <FILE id="UznRSs" name="acoustic-snare-ohleft-mic.wav" compile="0"
+              resource="1" file="Samples/acoustic-snare/acoustic-snare-ohleft-mic.wav"/>
+        <FILE id="beYNHX" name="acoustic-snare-ohright-mic.wav" compile="0"
+              resource="1" file="Samples/acoustic-snare/acoustic-snare-ohright-mic.wav"/>
+        <FILE id="EVnXNc" name="acoustic-snare-racktom-mic.wav" compile="0"
+              resource="1" file="Samples/acoustic-snare/acoustic-snare-racktom-mic.wav"/>
+        <FILE id="hlsTRr" name="acoustic-snare-ride-mic.wav" compile="0" resource="1"
+              file="Samples/acoustic-snare/acoustic-snare-ride-mic.wav"/>
+        <FILE id="rnVmUw" name="acoustic-snare-snare-mic.wav" compile="0" resource="1"
+              file="Samples/acoustic-snare/acoustic-snare-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{7BE8FF76-B18E-2C00-6317-F2ED6EAB5760}" name="bass-drum">
+        <FILE id="LddwsG" name="bass-drum-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-floortom-mic.wav"/>
+        <FILE id="nX8b1t" name="bass-drum-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-hihat-mic.wav"/>
+        <FILE id="dAjipd" name="bass-drum-kick-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-kick-mic.wav"/>
+        <FILE id="SWQ6bS" name="bass-drum-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-ohleft-mic.wav"/>
+        <FILE id="zUXnfo" name="bass-drum-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-ohright-mic.wav"/>
+        <FILE id="g9NA3D" name="bass-drum-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-racktom-mic.wav"/>
+        <FILE id="oErCPu" name="bass-drum-ride-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-ride-mic.wav"/>
+        <FILE id="Immycq" name="bass-drum-snare-mic.wav" compile="0" resource="1"
+              file="Samples/bass-drum/bass-drum-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{67B96493-7A0E-4123-7E9D-7F510ED72CF1}" name="closed-hihat">
+        <FILE id="yFLSbz" name="closed-hihat-floortom-mic.wav" compile="0"
+              resource="1" file="Samples/closed-hihat/closed-hihat-floortom-mic.wav"/>
+        <FILE id="hHfznW" name="closed-hihat-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/closed-hihat/closed-hihat-hihat-mic.wav"/>
+        <FILE id="WAZVIu" name="closed-hihat-kick-mic.wav" compile="0" resource="1"
+              file="Samples/closed-hihat/closed-hihat-kick-mic.wav"/>
+        <FILE id="wpePw5" name="closed-hihat-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/closed-hihat/closed-hihat-ohleft-mic.wav"/>
+        <FILE id="j23TBB" name="closed-hihat-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/closed-hihat/closed-hihat-ohright-mic.wav"/>
+        <FILE id="Jyc4jZ" name="closed-hihat-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/closed-hihat/closed-hihat-racktom-mic.wav"/>
+        <FILE id="zLWhoi" name="closed-hihat-ride-mic.wav" compile="0" resource="1"
+              file="Samples/closed-hihat/closed-hihat-ride-mic.wav"/>
+        <FILE id="AEjk01" name="closed-hihat-snare-mic.wav" compile="0" resource="1"
+              file="Samples/closed-hihat/closed-hihat-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{20E78338-BA44-349C-E908-8FB3C25A7166}" name="crash-cymbal-1">
+        <FILE id="PHaV03" name="crash-cymbal-1-floortom-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-1/crash-cymbal-1-floortom-mic.wav"/>
+        <FILE id="B8inJx" name="crash-cymbal-1-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-1/crash-cymbal-1-hihat-mic.wav"/>
+        <FILE id="J7QzJS" name="crash-cymbal-1-kick-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-1/crash-cymbal-1-kick-mic.wav"/>
+        <FILE id="QlFO50" name="crash-cymbal-1-ohleft-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-1/crash-cymbal-1-ohleft-mic.wav"/>
+        <FILE id="tOg5st" name="crash-cymbal-1-ohright-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-1/crash-cymbal-1-ohright-mic.wav"/>
+        <FILE id="AYUJB4" name="crash-cymbal-1-racktom-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-1/crash-cymbal-1-racktom-mic.wav"/>
+        <FILE id="X9UR5N" name="crash-cymbal-1-ride-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-1/crash-cymbal-1-ride-mic.wav"/>
+        <FILE id="bpNWQd" name="crash-cymbal-1-snare-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-1/crash-cymbal-1-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{5005FF54-D9C7-B07E-AC5C-0C9FA55CC2FB}" name="crash-cymbal-2">
+        <FILE id="awjjNH" name="crash-cymbal-1-floortom-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-floortom-mic.wav"/>
+        <FILE id="LSz8LY" name="crash-cymbal-1-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-1-hihat-mic.wav"/>
+        <FILE id="sfn0ff" name="crash-cymbal-1-kick-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-1-kick-mic.wav"/>
+        <FILE id="JFck9a" name="crash-cymbal-1-ohleft-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-ohleft-mic.wav"/>
+        <FILE id="IKDRDo" name="crash-cymbal-1-ohright-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-ohright-mic.wav"/>
+        <FILE id="ohqOku" name="crash-cymbal-1-racktom-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-racktom-mic.wav"/>
+        <FILE id="bmOcCV" name="crash-cymbal-1-ride-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-1-ride-mic.wav"/>
+        <FILE id="ToTcxc" name="crash-cymbal-1-snare-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-1-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{39BAAFFE-65F9-45DE-5CA3-8F573F6471A8}" name="floor-tom">
+        <FILE id="CVFrYc" name="floor-tom-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-floortom-mic.wav"/>
+        <FILE id="VrTwYF" name="floor-tom-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-hihat-mic.wav"/>
+        <FILE id="vLOea1" name="floor-tom-kick-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-kick-mic.wav"/>
+        <FILE id="pnyI6t" name="floor-tom-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-ohleft-mic.wav"/>
+        <FILE id="JTwXQw" name="floor-tom-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-ohright-mic.wav"/>
+        <FILE id="tY7947" name="floor-tom-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-racktom-mic.wav"/>
+        <FILE id="o1ah6z" name="floor-tom-ride-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-ride-mic.wav"/>
+        <FILE id="lofVp9" name="floor-tom-snare-mic.wav" compile="0" resource="1"
+              file="Samples/floor-tom/floor-tom-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{C7025248-5680-66CF-3436-FCA21EC0616D}" name="open-hihat">
+        <FILE id="hbuCM9" name="open-hihat-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-floortom-mic.wav"/>
+        <FILE id="cMEK91" name="open-hihat-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-hihat-mic.wav"/>
+        <FILE id="ZuiMsn" name="open-hihat-kick-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-kick-mic.wav"/>
+        <FILE id="celd36" name="open-hihat-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-ohleft-mic.wav"/>
+        <FILE id="QQbVuJ" name="open-hihat-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-ohright-mic.wav"/>
+        <FILE id="Jy2oBX" name="open-hihat-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-racktom-mic.wav"/>
+        <FILE id="N66P5W" name="open-hihat-ride-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-ride-mic.wav"/>
+        <FILE id="g8sOx2" name="open-hihat-snare-mic.wav" compile="0" resource="1"
+              file="Samples/open-hihat/open-hihat-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{AED3644D-9AA4-F510-77A6-9553E4D522B9}" name="pedal-hihat">
+        <FILE id="U1ATOL" name="pedal-hihat-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-floortom-mic.wav"/>
+        <FILE id="rnzM4a" name="pedal-hihat-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-hihat-mic.wav"/>
+        <FILE id="Y0vRWV" name="pedal-hihat-kick-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-kick-mic.wav"/>
+        <FILE id="dp8qQ5" name="pedal-hihat-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-ohleft-mic.wav"/>
+        <FILE id="wwUAQs" name="pedal-hihat-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-ohright-mic.wav"/>
+        <FILE id="TAMYcr" name="pedal-hihat-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-racktom-mic.wav"/>
+        <FILE id="oQPMVA" name="pedal-hihat-ride-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-ride-mic.wav"/>
+        <FILE id="FEkngx" name="pedal-hihat-snare-mic.wav" compile="0" resource="1"
+              file="Samples/pedal-hihat/pedal-hihat-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{92EC5DFE-E98C-75AB-A482-9890099161AF}" name="rack-tom">
+        <FILE id="ahD1Ca" name="rack-tom-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-floortom-mic.wav"/>
+        <FILE id="VBtcaD" name="rack-tom-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-hihat-mic.wav"/>
+        <FILE id="VDzLF5" name="rack-tom-kick-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-kick-mic.wav"/>
+        <FILE id="MUD1ui" name="rack-tom-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-ohleft-mic.wav"/>
+        <FILE id="B5768F" name="rack-tom-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-ohright-mic.wav"/>
+        <FILE id="qHpyyu" name="rack-tom-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-racktom-mic.wav"/>
+        <FILE id="NvlZzG" name="rack-tom-ride-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-ride-mic.wav"/>
+        <FILE id="GFnVGk" name="rack-tom-snare-mic.wav" compile="0" resource="1"
+              file="Samples/rack-tom/rack-tom-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{F5C5CE73-0135-C859-2AED-B6132FEE7C37}" name="ride-bell">
+        <FILE id="sqoj86" name="ride-bell-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-floortom-mic.wav"/>
+        <FILE id="dAt7KY" name="ride-bell-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-hihat-mic.wav"/>
+        <FILE id="UvBF3v" name="ride-bell-kick-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-kick-mic.wav"/>
+        <FILE id="FO5XHo" name="ride-bell-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-ohleft-mic.wav"/>
+        <FILE id="fyDA6Q" name="ride-bell-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-ohright-mic.wav"/>
+        <FILE id="Dhof8S" name="ride-bell-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-racktom-mic.wav"/>
+        <FILE id="kJmZ15" name="ride-bell-ride-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-ride-mic.wav"/>
+        <FILE id="C0FL3X" name="ride-bell-snare-mic.wav" compile="0" resource="1"
+              file="Samples/ride-bell/ride-bell-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{FFD24E5B-EB7A-E020-AFBD-CA1C1C0A58D0}" name="ride-cymbal">
+        <FILE id="i9pUHI" name="ride-cymbal-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-floortom-mic.wav"/>
+        <FILE id="ovHQSk" name="ride-cymbal-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-hihat-mic.wav"/>
+        <FILE id="G3VQhx" name="ride-cymbal-kick-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-kick-mic.wav"/>
+        <FILE id="yK7NkD" name="ride-cymbal-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-ohleft-mic.wav"/>
+        <FILE id="HfWfeZ" name="ride-cymbal-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-ohright-mic.wav"/>
+        <FILE id="knHOhF" name="ride-cymbal-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-racktom-mic.wav"/>
+        <FILE id="XosFbw" name="ride-cymbal-ride-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-ride-mic.wav"/>
+        <FILE id="Ea9Qtb" name="ride-cymbal-snare-mic.wav" compile="0" resource="1"
+              file="Samples/ride-cymbal/ride-cymbal-snare-mic.wav"/>
+      </GROUP>
+      <GROUP id="{B998FABE-E433-0A6C-F55F-157DA44C0277}" name="side-stick">
+        <FILE id="IVQE2n" name="side-stick-floortom-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-floortom-mic.wav"/>
+        <FILE id="lnXmXO" name="side-stick-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-hihat-mic.wav"/>
+        <FILE id="b0LKp8" name="side-stick-kick-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-kick-mic.wav"/>
+        <FILE id="Nh3k8u" name="side-stick-ohleft-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-ohleft-mic.wav"/>
+        <FILE id="Li6SRs" name="side-stick-ohright-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-ohright-mic.wav"/>
+        <FILE id="hzBonG" name="side-stick-racktom-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-racktom-mic.wav"/>
+        <FILE id="g672lx" name="side-stick-ride-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-ride-mic.wav"/>
+        <FILE id="fQ7JxW" name="side-stick-snare-mic.wav" compile="0" resource="1"
+              file="Samples/side-stick/side-stick-snare-mic.wav"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{6CB996A5-DECE-FF00-20F0-B96F5FC530A9}" name="Source">
+      <FILE id="m0FVAC" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="qMSIl7" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="lZHD6U" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="kO0dsh" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+    <FILE id="R25cNX" name="DrumComponent.cpp" compile="1" resource="0"
+          file="Source/DrumComponent.cpp"/>
+    <FILE id="oRHJPh" name="DrumComponent.h" compile="0" resource="0" file="Source/DrumComponent.h"/>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Acres Basement Kit"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Acres Basement Kit"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../modules"/>
+        <MODULEPATH id="juce_events" path="../../modules"/>
+        <MODULEPATH id="juce_graphics" path="../../modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
