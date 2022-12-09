@@ -9,6 +9,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "Constants.h"
+#include "DrumSample.h"
 
 //==============================================================================
 AcresBasementKitAudioProcessor::AcresBasementKitAudioProcessor()
@@ -18,9 +19,7 @@ AcresBasementKitAudioProcessor::AcresBasementKitAudioProcessor()
 #if ! JucePlugin_IsSynth
 		.withInput("Input", juce::AudioChannelSet::stereo(), true)
 #endif
-		.withOutput("Output #1", juce::AudioChannelSet::mono(), true)
-		.withOutput("Output #2", juce::AudioChannelSet::mono(), true)
-		.withOutput("Output #3", juce::AudioChannelSet::mono(), true)
+		.withOutput("Output 1", juce::AudioChannelSet::stereo(), true)
 #endif
 	)
 #endif
@@ -35,8 +34,8 @@ AcresBasementKitAudioProcessor::AcresBasementKitAudioProcessor()
 			std::string microphoneName = constants::microphoneNames[microphoneIndex];
 			std::string fullName = sampleName + microphoneName + "mic_wav";
 			addSampleToSynthesiser(fullName, midiNote);
-			auto voice = new juce::SamplerVoice();
-			
+			auto voice = new DrumSamplerVoice();
+
 			mSynthesiser.addVoice(voice);
 		}
 	}
@@ -177,7 +176,7 @@ void AcresBasementKitAudioProcessor::addSampleToSynthesiser(std::string resource
 	{
 		juce::BigInteger range;
 		range.setRange(midiNote, 1, true);
-		mSynthesiser.addSound(new juce::SamplerSound(resourceName, *reader, range, midiNote, 0, 10, 5));
+		mSynthesiser.addSound(new DrumSamplerSound(juce::String(resourceName.c_str()), *reader, range, midiNote, 0.0, 10.0, 5.0));
 	}
 }
 

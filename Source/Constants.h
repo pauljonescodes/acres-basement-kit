@@ -20,7 +20,7 @@ namespace constants
 
 	static const size_t samplesSize = 12;
 	static const std::string samplesNames[samplesSize] = { "acousticsnare", "bassdrum", "closedhihat", "crashcymbal1", "crashcymbal2", "floortom", "openhihat", "pedalhihat", "racktom", "ridebell", "ridecymbal", "sidestick" };
-	static const int samplesMidiNotes[samplesSize] = { snareMidiNote, bassDrumMidiNote, closedHiHatMidiNote, crashCymbal1MidiNote, crashCymbal2MidiNote, floorTomMidiNote, openHiHatMidiNote, pedalHiHatMidiNote, rackTomMidiNote, rideBellMidiNote, rideCymbalMidiNote, sideStickMidiNote }; 
+	static const int samplesMidiNotes[samplesSize] = { snareMidiNote, bassDrumMidiNote, closedHiHatMidiNote, crashCymbal1MidiNote, crashCymbal2MidiNote, floorTomMidiNote, openHiHatMidiNote, pedalHiHatMidiNote, rackTomMidiNote, rideBellMidiNote, rideCymbalMidiNote, sideStickMidiNote };
 
 	static const size_t microphonesSize = 8;
 	static const std::string microphoneNames[microphonesSize] = { "floortom", "hihat", "kick", "ohleft", "ohright", "racktom", "ride", "snare" };
