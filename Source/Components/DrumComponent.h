@@ -43,6 +43,7 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+    void setOnDrumMidiButtonClicked(std::optional<std::function<void(int)>> callback);
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -53,10 +54,24 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+
+    std::optional<std::function<void(int)>> mOnDrumMidiButtonClicked;
+
     //[/UserVariables]
 
     //==============================================================================
     std::unique_ptr<juce::TextButton> juce__kickButton;
+    std::unique_ptr<juce::TextButton> juce__snareButton;
+    std::unique_ptr<juce::TextButton> juce__rackTomButton;
+    std::unique_ptr<juce::TextButton> juce__floorTomButton;
+    std::unique_ptr<juce::TextButton> juce__rideBellButton;
+    std::unique_ptr<juce::TextButton> juce__rideCymbalButton;
+    std::unique_ptr<juce::TextButton> juce__sideStickButton;
+    std::unique_ptr<juce::TextButton> juce__crash1Button;
+    std::unique_ptr<juce::TextButton> juce__crash2Button;
+    std::unique_ptr<juce::TextButton> juce__hiHatPedalButton;
+    std::unique_ptr<juce::TextButton> juce__hiHatClosedButton;
+    std::unique_ptr<juce::TextButton> juce__hiHatOpenButton;
 
 
     //==============================================================================

@@ -80,22 +80,22 @@
               file="Samples/crash-cymbal-1/crash-cymbal-1-snare-mic.wav"/>
       </GROUP>
       <GROUP id="{5005FF54-D9C7-B07E-AC5C-0C9FA55CC2FB}" name="crash-cymbal-2">
-        <FILE id="awjjNH" name="crash-cymbal-1-floortom-mic.wav" compile="0"
-              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-floortom-mic.wav"/>
-        <FILE id="LSz8LY" name="crash-cymbal-1-hihat-mic.wav" compile="0" resource="1"
-              file="Samples/crash-cymbal-2/crash-cymbal-1-hihat-mic.wav"/>
-        <FILE id="sfn0ff" name="crash-cymbal-1-kick-mic.wav" compile="0" resource="1"
-              file="Samples/crash-cymbal-2/crash-cymbal-1-kick-mic.wav"/>
-        <FILE id="JFck9a" name="crash-cymbal-1-ohleft-mic.wav" compile="0"
-              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-ohleft-mic.wav"/>
-        <FILE id="IKDRDo" name="crash-cymbal-1-ohright-mic.wav" compile="0"
-              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-ohright-mic.wav"/>
-        <FILE id="ohqOku" name="crash-cymbal-1-racktom-mic.wav" compile="0"
-              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-1-racktom-mic.wav"/>
-        <FILE id="bmOcCV" name="crash-cymbal-1-ride-mic.wav" compile="0" resource="1"
-              file="Samples/crash-cymbal-2/crash-cymbal-1-ride-mic.wav"/>
-        <FILE id="ToTcxc" name="crash-cymbal-1-snare-mic.wav" compile="0" resource="1"
-              file="Samples/crash-cymbal-2/crash-cymbal-1-snare-mic.wav"/>
+        <FILE id="fdTTwe" name="crash-cymbal-2-floortom-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-2-floortom-mic.wav"/>
+        <FILE id="dDgw88" name="crash-cymbal-2-hihat-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-2-hihat-mic.wav"/>
+        <FILE id="Tfgs2I" name="crash-cymbal-2-kick-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-2-kick-mic.wav"/>
+        <FILE id="woCSsg" name="crash-cymbal-2-ohleft-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-2-ohleft-mic.wav"/>
+        <FILE id="ACikBi" name="crash-cymbal-2-ohright-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-2-ohright-mic.wav"/>
+        <FILE id="b6XjLq" name="crash-cymbal-2-racktom-mic.wav" compile="0"
+              resource="1" file="Samples/crash-cymbal-2/crash-cymbal-2-racktom-mic.wav"/>
+        <FILE id="HVukU2" name="crash-cymbal-2-ride-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-2-ride-mic.wav"/>
+        <FILE id="PN7vd1" name="crash-cymbal-2-snare-mic.wav" compile="0" resource="1"
+              file="Samples/crash-cymbal-2/crash-cymbal-2-snare-mic.wav"/>
       </GROUP>
       <GROUP id="{39BAAFFE-65F9-45DE-5CA3-8F573F6471A8}" name="floor-tom">
         <FILE id="CVFrYc" name="floor-tom-floortom-mic.wav" compile="0" resource="1"
@@ -225,6 +225,12 @@
       </GROUP>
     </GROUP>
     <GROUP id="{6CB996A5-DECE-FF00-20F0-B96F5FC530A9}" name="Source">
+      <GROUP id="{53824F92-C2BF-B335-4DAF-BF3BE0EAB6ED}" name="Components">
+        <FILE id="y2E9Yf" name="DrumComponent.cpp" compile="1" resource="0"
+              file="Source/Components/DrumComponent.cpp"/>
+        <FILE id="SnnBLC" name="DrumComponent.h" compile="0" resource="0" file="Source/Components/DrumComponent.h"/>
+      </GROUP>
+      <FILE id="uh06vD" name="Constants.h" compile="0" resource="0" file="Source/Constants.h"/>
       <FILE id="m0FVAC" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="qMSIl7" name="PluginProcessor.h" compile="0" resource="0"
@@ -233,9 +239,6 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="kO0dsh" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <FILE id="R25cNX" name="DrumComponent.cpp" compile="1" resource="0"
-          file="Source/DrumComponent.cpp"/>
-    <FILE id="oRHJPh" name="DrumComponent.h" compile="0" resource="0" file="Source/DrumComponent.h"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>

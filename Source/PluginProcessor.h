@@ -57,7 +57,8 @@ public:
     void setStateInformation(const void* data, int sizeInBytes) override;
 
     //===    
-    void addSampleToSynthesiser(const char* resourceName, int midiNote);
+    void addSampleToSynthesiser(std::string resourceName, int midiNote);
+    void noteOnSynthesiser(int midiNoteNumber);
 
 private:
     std::atomic<bool> mShouldUpdate{ false };
