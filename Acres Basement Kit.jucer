@@ -3,7 +3,7 @@
 <JUCERPROJECT id="t1Dw6t" name="Acres Basement Kit" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
               jucerFormatVersion="1" version="0.0.1" companyWebsite="www.jaulrecords.com"
-              companyName="Jaul Records" companyCopyright="2022" companyEmail="studio@jaulrecords.com"
+              companyName="Jaul DSP" companyCopyright="2022" companyEmail="studio@jaulrecords.com"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="KeEiJ1" name="Acres Basement Kit">
     <GROUP id="{63373324-B844-4169-6047-6FC1761960A4}" name="Samples">
@@ -228,9 +228,16 @@
       <FILE id="GpvCpz" name="DrumSample.cpp" compile="1" resource="0" file="Source/DrumSample.cpp"/>
       <FILE id="livqho" name="DrumSample.h" compile="0" resource="0" file="Source/DrumSample.h"/>
       <GROUP id="{53824F92-C2BF-B335-4DAF-BF3BE0EAB6ED}" name="Components">
+        <FILE id="y2sYsj" name="MainComponent.cpp" compile="1" resource="0"
+              file="Source/Components/MainComponent.cpp"/>
+        <FILE id="eNoX7i" name="MainComponent.h" compile="0" resource="0" file="Source/Components/MainComponent.h"/>
+        <FILE id="SnnBLC" name="DrumComponent.h" compile="0" resource="0" file="Source/Components/DrumComponent.h"/>
         <FILE id="y2E9Yf" name="DrumComponent.cpp" compile="1" resource="0"
               file="Source/Components/DrumComponent.cpp"/>
-        <FILE id="SnnBLC" name="DrumComponent.h" compile="0" resource="0" file="Source/Components/DrumComponent.h"/>
+        <FILE id="CvOL3e" name="MixerComponent.cpp" compile="1" resource="0"
+              file="Source/Components/MixerComponent.cpp"/>
+        <FILE id="R9DQ7I" name="MixerComponent.h" compile="0" resource="0"
+              file="Source/Components/MixerComponent.h"/>
       </GROUP>
       <FILE id="uh06vD" name="Constants.h" compile="0" resource="0" file="Source/Constants.h"/>
       <FILE id="m0FVAC" name="PluginProcessor.cpp" compile="1" resource="0"

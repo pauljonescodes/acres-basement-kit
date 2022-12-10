@@ -16,11 +16,17 @@ AcresBasementKitAudioProcessorEditor::AcresBasementKitAudioProcessorEditor(Acres
 {
 	// Make sure that before the constructor has finished, you've set the
 	// editor's size to whatever you need it to be.
-	addAndMakeVisible(drumComponent);
-	setSize(480, 320);
-
-	drumComponent.setOnDrumMidiButtonClicked([this](int midiNote) -> void {
+	addAndMakeVisible(mMainComponent);
+	setSize(600, 600);
+	setResizable(true, true);
+	mMainComponent.getMixerComponent()->setGains(this->audioProcessor.getSampleGains()[0]);
+	
+	mMainComponent.getDrumComponent()->setOnDrumMidiButtonClicked([this](int midiNote) -> void {
 		audioProcessor.noteOnSynthesiser(midiNote);
+		});
+
+	mMainComponent.getMixerComponent()->setOnInstrumentChanged([this](int index) -> void {
+		mMainComponent.getMixerComponent()->setGains(this->audioProcessor.getSampleGains()[index]);
 		});
 }
 
@@ -31,7 +37,7 @@ AcresBasementKitAudioProcessorEditor::~AcresBasementKitAudioProcessorEditor()
 //==============================================================================
 void AcresBasementKitAudioProcessorEditor::paint(juce::Graphics& g)
 {
-	drumComponent.setBounds(0, 0, getWidth(), getHeight());
+	mMainComponent.setBounds(0, 0, getWidth(), getHeight());
 
 }
 

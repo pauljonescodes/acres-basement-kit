@@ -34,9 +34,10 @@ public:
 		@param maxSampleLengthSeconds   a maximum length of audio to read from the audio
 										source, in seconds
 	*/
-	DrumSamplerSound(std::string name,
+	DrumSamplerSound(const juce::String& soundName,
 		juce::AudioFormatReader& source,
-		const juce::BigInteger& midiNotes,
+		const juce::BigInteger& notes,
+		std::atomic<float>* gain,
 		int midiNoteForNormalPitch,
 		double attackTimeSecs,
 		double releaseTimeSecs,
@@ -53,6 +54,13 @@ public:
 		This could return nullptr if there was a problem loading the data.
 	*/
 	juce::AudioBuffer<float>* getAudioData() const noexcept { return data.get(); }
+	float getGain() const noexcept {
+		if (mGain != nullptr) {
+			return *mGain;
+		}
+
+		return 1;
+	}
 
 	//==============================================================================
 	/** Changes the parameters of the ADSR envelope which will be applied to the sample. */
@@ -70,7 +78,9 @@ private:
 	std::unique_ptr<juce::AudioBuffer<float>> data;
 	double sourceSampleRate;
 	juce::BigInteger midiNotes;
-	int length = 0, midiRootNote = 0;
+	int length = 0;
+	int midiRootNote = 0;
+	std::atomic<float>* mGain;
 
 	juce::ADSR::Parameters params;
 
@@ -113,9 +123,10 @@ public:
 
 private:
 	//==============================================================================
-	double pitchRatio = 0;
-	double sourceSamplePosition = 0;
-	float lgain = 0, rgain = 0;
+	double mPitchRatio = 0;
+	double mSourceSamplePosition = 0;
+	float mLeftGain = 0;
+	float mRightGain = 0;
 
 	juce::ADSR adsr;
 

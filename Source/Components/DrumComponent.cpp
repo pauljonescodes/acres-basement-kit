@@ -35,82 +35,85 @@ DrumComponent::DrumComponent ()
 
     juce__kickButton.reset (new juce::TextButton ("kick_button"));
     addAndMakeVisible (juce__kickButton.get());
-    juce__kickButton->setButtonText (TRANS("Kick"));
+    juce__kickButton->setButtonText (TRANS("Kick C1"));
     juce__kickButton->addListener (this);
 
     juce__snareButton.reset (new juce::TextButton ("new button"));
     addAndMakeVisible (juce__snareButton.get());
-    juce__snareButton->setButtonText (TRANS("Snare"));
+    juce__snareButton->setButtonText (TRANS("Snare D1"));
     juce__snareButton->addListener (this);
 
-    juce__snareButton->setBounds (8, 144, 150, 50);
+    juce__snareButton->setBounds (8, 128, 152, 72);
 
     juce__rackTomButton.reset (new juce::TextButton ("new button"));
     addAndMakeVisible (juce__rackTomButton.get());
-    juce__rackTomButton->setButtonText (TRANS("Rack tom"));
+    juce__rackTomButton->setButtonText (TRANS("Rack tom D2"));
     juce__rackTomButton->addListener (this);
 
-    juce__rackTomButton->setBounds (168, 56, 100, 50);
+    juce__rackTomButton->setBounds (168, 72, 104, 48);
 
     juce__floorTomButton.reset (new juce::TextButton ("floorTomButton"));
     addAndMakeVisible (juce__floorTomButton.get());
-    juce__floorTomButton->setButtonText (TRANS("Floor tom"));
+    juce__floorTomButton->setButtonText (TRANS("Floor tom G1"));
     juce__floorTomButton->addListener (this);
 
-    juce__floorTomButton->setBounds (376, 112, 100, 150);
+    juce__floorTomButton->setBounds (328, 128, 100, 152);
 
     juce__rideBellButton.reset (new juce::TextButton ("new button"));
     addAndMakeVisible (juce__rideBellButton.get());
-    juce__rideBellButton->setButtonText (TRANS("Ride bell"));
+    juce__rideBellButton->setButtonText (TRANS("Ride bell F2"));
     juce__rideBellButton->addListener (this);
 
-    juce__rideBellButton->setBounds (336, 48, 75, 24);
+    juce__rideBellButton->setBounds (280, 48, 144, 32);
 
     juce__rideCymbalButton.reset (new juce::TextButton ("rideCymbalButton"));
     addAndMakeVisible (juce__rideCymbalButton.get());
-    juce__rideCymbalButton->setButtonText (TRANS("Ride cymbal"));
+    juce__rideCymbalButton->setButtonText (TRANS("Ride cymbal Eb2"));
     juce__rideCymbalButton->addListener (this);
 
-    juce__rideCymbalButton->setBounds (272, 80, 200, 24);
+    juce__rideCymbalButton->setBounds (280, 88, 144, 32);
 
     juce__sideStickButton.reset (new juce::TextButton ("snareSideStickButton"));
     addAndMakeVisible (juce__sideStickButton.get());
-    juce__sideStickButton->setButtonText (TRANS("Side stick"));
+    juce__sideStickButton->setButtonText (TRANS("Side stick C#1"));
     juce__sideStickButton->addListener (this);
 
-    juce__sideStickButton->setBounds (8, 112, 150, 24);
+    juce__sideStickButton->setBounds (8, 208, 152, 32);
 
     juce__crash1Button.reset (new juce::TextButton ("crash1Button"));
     addAndMakeVisible (juce__crash1Button.get());
-    juce__crash1Button->setButtonText (TRANS("Crash 1"));
+    juce__crash1Button->setButtonText (TRANS("Crash-1 C#2"));
     juce__crash1Button->addListener (this);
 
-    juce__crash1Button->setBounds (8, 16, 150, 24);
+    juce__crash1Button->setBounds (8, 8, 150, 32);
 
     juce__crash2Button.reset (new juce::TextButton ("crash2Button"));
     addAndMakeVisible (juce__crash2Button.get());
-    juce__crash2Button->setButtonText (TRANS("Crash 2"));
+    juce__crash2Button->setButtonText (TRANS("Crash-2 A2"));
     juce__crash2Button->addListener (this);
 
-    juce__crash2Button->setBounds (320, 16, 150, 24);
+    juce__crash2Button->setBounds (280, 8, 142, 32);
 
     juce__hiHatPedalButton.reset (new juce::TextButton ("Hi-hat pedal"));
     addAndMakeVisible (juce__hiHatPedalButton.get());
+    juce__hiHatPedalButton->setButtonText (TRANS("Hi-hat pedal Ab1"));
     juce__hiHatPedalButton->addListener (this);
 
-    juce__hiHatPedalButton->setBounds (8, 288, 120, 24);
+    juce__hiHatPedalButton->setBounds (8, 248, 152, 32);
 
     juce__hiHatClosedButton.reset (new juce::TextButton ("Hi-hat closed"));
     addAndMakeVisible (juce__hiHatClosedButton.get());
+    juce__hiHatClosedButton->setButtonText (TRANS("Hi-hat closed F#1"));
     juce__hiHatClosedButton->addListener (this);
 
-    juce__hiHatClosedButton->setBounds (8, 80, 120, 24);
+    juce__hiHatClosedButton->setBounds (8, 88, 152, 32);
 
     juce__hiHatOpenButton.reset (new juce::TextButton ("Hi-hat open"));
     addAndMakeVisible (juce__hiHatOpenButton.get());
+    juce__hiHatOpenButton->setButtonText (TRANS("Hi-hat open Bb1"));
     juce__hiHatOpenButton->addListener (this);
 
-    juce__hiHatOpenButton->setBounds (8, 48, 120, 24);
+    juce__hiHatOpenButton->setBounds (8, 48, 152, 32);
 
 
     //[UserPreSize]
@@ -163,7 +166,7 @@ void DrumComponent::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    juce__kickButton->setBounds (268 - (200 / 2), 212 - (200 / 2), 200, 200);
+    juce__kickButton->setBounds (244 - (152 / 2), 204 - (152 / 2), 152, 152);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -300,40 +303,40 @@ BEGIN_JUCER_METADATA
                  fixedSize="0" initialWidth="600" initialHeight="300">
   <BACKGROUND backgroundColour="ff323e44"/>
   <TEXTBUTTON name="kick_button" id="7509bc91ce1408dd" memberName="juce__kickButton"
-              virtualName="" explicitFocusOrder="0" pos="268c 212c 200 200"
-              buttonText="Kick" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              virtualName="" explicitFocusOrder="0" pos="244c 204c 152 152"
+              buttonText="Kick C1" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="e11024f0728789f0" memberName="juce__snareButton"
-              virtualName="" explicitFocusOrder="0" pos="8 144 150 50" buttonText="Snare"
+              virtualName="" explicitFocusOrder="0" pos="8 128 152 72" buttonText="Snare D1"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="fe96731aa1f650b3" memberName="juce__rackTomButton"
-              virtualName="" explicitFocusOrder="0" pos="168 56 100 50" buttonText="Rack tom"
+              virtualName="" explicitFocusOrder="0" pos="168 72 104 48" buttonText="Rack tom D2"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="floorTomButton" id="4cb4a1aed8d93f23" memberName="juce__floorTomButton"
-              virtualName="" explicitFocusOrder="0" pos="376 112 100 150" buttonText="Floor tom"
+              virtualName="" explicitFocusOrder="0" pos="328 128 100 152" buttonText="Floor tom G1"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="c7e23455c583f701" memberName="juce__rideBellButton"
-              virtualName="" explicitFocusOrder="0" pos="336 48 75 24" buttonText="Ride bell"
+              virtualName="" explicitFocusOrder="0" pos="280 48 144 32" buttonText="Ride bell F2"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="rideCymbalButton" id="6167a03f041bdfb4" memberName="juce__rideCymbalButton"
-              virtualName="" explicitFocusOrder="0" pos="272 80 200 24" buttonText="Ride cymbal"
+              virtualName="" explicitFocusOrder="0" pos="280 88 144 32" buttonText="Ride cymbal Eb2"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="snareSideStickButton" id="87297e327e043866" memberName="juce__sideStickButton"
-              virtualName="" explicitFocusOrder="0" pos="8 112 150 24" buttonText="Side stick"
+              virtualName="" explicitFocusOrder="0" pos="8 208 152 32" buttonText="Side stick C#1"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="crash1Button" id="f9b7a2e66396ebc3" memberName="juce__crash1Button"
-              virtualName="" explicitFocusOrder="0" pos="8 16 150 24" buttonText="Crash 1"
+              virtualName="" explicitFocusOrder="0" pos="8 8 150 32" buttonText="Crash-1 C#2"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="crash2Button" id="f4ae963d6408edd8" memberName="juce__crash2Button"
-              virtualName="" explicitFocusOrder="0" pos="320 16 150 24" buttonText="Crash 2"
+              virtualName="" explicitFocusOrder="0" pos="280 8 142 32" buttonText="Crash-2 A2"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="Hi-hat pedal" id="46597dbc4d5d6b1e" memberName="juce__hiHatPedalButton"
-              virtualName="" explicitFocusOrder="0" pos="8 288 120 24" buttonText="Hi-hat pedal"
+              virtualName="" explicitFocusOrder="0" pos="8 248 152 32" buttonText="Hi-hat pedal Ab1"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="Hi-hat closed" id="b50f7a3777a87428" memberName="juce__hiHatClosedButton"
-              virtualName="" explicitFocusOrder="0" pos="8 80 120 24" buttonText="Hi-hat closed"
+              virtualName="" explicitFocusOrder="0" pos="8 88 152 32" buttonText="Hi-hat closed F#1"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="Hi-hat open" id="be645c42f11819f5" memberName="juce__hiHatOpenButton"
-              virtualName="" explicitFocusOrder="0" pos="8 48 120 24" buttonText="Hi-hat open"
+              virtualName="" explicitFocusOrder="0" pos="8 48 152 32" buttonText="Hi-hat open Bb1"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
