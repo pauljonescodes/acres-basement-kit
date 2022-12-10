@@ -34,7 +34,7 @@ public:
 		@param maxSampleLengthSeconds   a maximum length of audio to read from the audio
 										source, in seconds
 	*/
-	DrumSamplerSound(juce::String& name,
+	DrumSamplerSound(std::string name,
 		juce::AudioFormatReader& source,
 		const juce::BigInteger& midiNotes,
 		int midiNoteForNormalPitch,

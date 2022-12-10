@@ -10,7 +10,7 @@
 
 #include "DrumSample.h"
 
-DrumSamplerSound::DrumSamplerSound(juce::String& name,
+DrumSamplerSound::DrumSamplerSound(std::string name,
 	juce::AudioFormatReader& source,
 	const juce::BigInteger& midiNotes,
 	int midiNoteForNormalPitch,

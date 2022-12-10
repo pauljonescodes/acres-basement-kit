@@ -34,7 +34,7 @@ AcresBasementKitAudioProcessor::AcresBasementKitAudioProcessor()
 			std::string microphoneName = constants::microphoneNames[microphoneIndex];
 			std::string fullName = sampleName + microphoneName + "mic_wav";
 			addSampleToSynthesiser(fullName, midiNote);
-			auto voice = new DrumSamplerVoice();
+			auto voice = new juce::SamplerVoice();
 
 			mSynthesiser.addVoice(voice);
 		}
@@ -155,7 +155,6 @@ void AcresBasementKitAudioProcessor::processBlock(juce::AudioBuffer<float>& buff
 	juce::ScopedNoDenormals noDenormals;
 	auto totalNumInputChannels = getTotalNumInputChannels();
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
-	auto busCount = getBusCount(false);
 
 	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
 		buffer.clear(i, 0, buffer.getNumSamples());
@@ -176,7 +175,7 @@ void AcresBasementKitAudioProcessor::addSampleToSynthesiser(std::string resource
 	{
 		juce::BigInteger range;
 		range.setRange(midiNote, 1, true);
-		mSynthesiser.addSound(new DrumSamplerSound(juce::String(resourceName.c_str()), *reader, range, midiNote, 0.0, 10.0, 5.0));
+		mSynthesiser.addSound(new juce::SamplerSound(resourceName, *reader, range, midiNote, 0.0, 10.0, 5.0));
 	}
 }
 
