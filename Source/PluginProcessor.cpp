@@ -298,7 +298,10 @@ std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInOverheadRightMicGa
 			{
 				juce::BigInteger range;
 				range.setRange(midiNote, 1, true);
-				DrumSamplerSound* sound = new DrumSamplerSound(juce::String(resourceName), *reader, range, micGain, midiNote, 0.0, 10.0, 5.0);
+				bool isOpenHiHat = sampleIndex == 6; // 0.1, 0.1, 10.0
+				double releaseTimeSecs = isOpenHiHat ? 0.1 : 10.0;
+
+				DrumSamplerSound* sound = new DrumSamplerSound(juce::String(resourceName), *reader, range, micGain, midiNote, 0.0, releaseTimeSecs, 5.0);
 
 				switch (microphoneIndex)
 				{
