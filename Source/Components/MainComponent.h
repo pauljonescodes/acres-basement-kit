@@ -45,9 +45,9 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    DrumComponent* MainComponent::getDrumComponent();
-    MixerComponent* MainComponent::getMixerComponent();
-    PanningComponent* MainComponent::getPanningComponent();
+    DrumComponent* getDrumComponent();
+    MixerComponent* getMixerComponent();
+    PanningComponent* getPanningComponent();
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;

@@ -4,7 +4,8 @@
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
               jucerFormatVersion="1" version="0.1.1" companyWebsite="www.jaulrecords.com"
               companyName="Jaul DSP" companyCopyright="2022" companyEmail="studio@jaulrecords.com"
-              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              pluginFormats="buildAAX,buildVST3" defines="JUCE_DISABLE_CAUTIOUS_PARAMETER_ID_CHECKING">
   <MAINGROUP id="KeEiJ1" name="Acres Basement Kit">
     <GROUP id="{63373324-B844-4169-6047-6FC1761960A4}" name="Samples">
       <GROUP id="{91D398C1-BD27-7B73-9500-647542423407}" name="acousticsnare">
