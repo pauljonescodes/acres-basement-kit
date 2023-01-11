@@ -19,275 +19,284 @@ AcresBasementKitAudioProcessor::AcresBasementKitAudioProcessor()
 #if ! JucePlugin_IsSynth
 		.withInput("Input", juce::AudioChannelSet::stereo(), true)
 #endif
-		.withOutput("#1 Kick mic out", juce::AudioChannelSet::mono(), true)
-		.withOutput("#2 Snare mic out", juce::AudioChannelSet::mono(), true)
-		.withOutput("#3 Hi-hat mic out", juce::AudioChannelSet::mono(), true)
-		.withOutput("#4 Rack tom mic out", juce::AudioChannelSet::mono(), true)
-		.withOutput("#5 Floor tom mic out", juce::AudioChannelSet::mono(), true)
-		.withOutput("#6 Ride mic out", juce::AudioChannelSet::mono(), true)
-		.withOutput("#7 Overhead left mic out", juce::AudioChannelSet::mono(), true)
-		.withOutput("#8 Overhead right mic out", juce::AudioChannelSet::mono(), true)
+		.withOutput("#1 Kick mic out", juce::AudioChannelSet::stereo(), true)
+		.withOutput("#2 Snare mic out", juce::AudioChannelSet::stereo(), true)
+		.withOutput("#3 Hi-hat mic out", juce::AudioChannelSet::stereo(), true)
+		.withOutput("#4 Rack tom mic out", juce::AudioChannelSet::stereo(), true)
+		.withOutput("#5 Floor tom mic out", juce::AudioChannelSet::stereo(), true)
+		.withOutput("#6 Ride mic out", juce::AudioChannelSet::stereo(), true)
+		.withOutput("#7 Overhead left mic out", juce::AudioChannelSet::stereo(), true)
+		.withOutput("#8 Overhead right mic out", juce::AudioChannelSet::stereo(), true)
 #endif
-	), mParameters(*this, nullptr, juce::Identifier("ABKParams"),
+	), mParameterValueTreeState(*this, nullptr, juce::Identifier("ABKParams"),
 		{
-std::make_unique<juce::AudioParameterFloat>("mKickInKickMicGain", "Kick In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mKickInSnareMicGain", "Kick In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mKickInHiHatMicGain", "Kick In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mKickInRackTomMicGain", "Kick In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mKickInFloorTomMicGain", "Kick In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mKickInRideMicGain", "Kick In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mKickInOverheadLeftMicGain", "Kick In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mKickInOverheadRightMicGain", "Kick In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mSnareInKickMicGain", "Snare In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSnareInSnareMicGain", "Snare In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSnareInHiHatMicGain", "Snare In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSnareInRackTomMicGain", "Snare In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSnareInFloorTomMicGain", "Snare In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSnareInRideMicGain", "Snare In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSnareInOverheadLeftMicGain", "Snare In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSnareInOverheadRightMicGain", "Snare In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("kick-mic-panning", "Kick Mic Panning", -1.0f, 1.0f, 0.0f),
+std::make_unique<juce::AudioParameterFloat>("snare-mic-panning", "Snare Mic Panning", -1.0f, 1.0f, -0.25f),
+std::make_unique<juce::AudioParameterFloat>("hihat-mic-panning", "Hi Hat Mic Panning", -1.0f, 1.0f, -0.25f),
+std::make_unique<juce::AudioParameterFloat>("racktom-mic-panning", "Rack Tom Mic Panning", -1.0f, 1.0f, 0.25f),
+std::make_unique<juce::AudioParameterFloat>("floortom-mic-panning", "Floor Tom Mic Panning", -1.0f, 1.0f, 0.5f),
+std::make_unique<juce::AudioParameterFloat>("ride-mic-panning", "Ride Mic Panning", -1.0f, 1.0f, 0.5f),
+std::make_unique<juce::AudioParameterFloat>("ohleft-mic-panning", "Overhead Left Mic Panning", -1.0f, 1.0f, -1.0f),
+std::make_unique<juce::AudioParameterFloat>("ohright-mic-panning", "Overhead Right Mic Panning", -1.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mSideStickInKickMicGain", "Side Stick In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSideStickInSnareMicGain", "Side Stick In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSideStickInHiHatMicGain", "Side Stick In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSideStickInRackTomMicGain", "Side Stick In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSideStickInFloorTomMicGain", "Side Stick In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSideStickInRideMicGain", "Side Stick In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSideStickInOverheadLeftMicGain", "Side Stick In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mSideStickInOverheadRightMicGain", "Side Stick In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-kick-mic-gain", "Kick In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-snare-mic-gain", "Kick In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-hihat-mic-gain", "Kick In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-racktom-mic-gain", "Kick In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-floortom-mic-gain", "Kick In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-ride-mic-gain", "Kick In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-ohleft-mic-gain", "Kick In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("bassdrum-in-ohright-mic-gain", "Kick In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInKickMicGain", "Pedal Hi Hat In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInSnareMicGain", "Pedal Hi Hat In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInHiHatMicGain", "Pedal Hi Hat In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInRackTomMicGain", "Pedal Hi Hat In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInFloorTomMicGain", "Pedal Hi Hat In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInRideMicGain", "Pedal Hi Hat In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInOverheadLeftMicGain", "Pedal Hi Hat In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mPedalHiHatInOverheadRightMicGain", "Pedal Hi Hat In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-kick-mic-gain", "Snare In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-snare-mic-gain", "Snare In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-hihat-mic-gain", "Snare In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-racktom-mic-gain", "Snare In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-floortom-mic-gain", "Snare In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-ride-mic-gain", "Snare In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-ohleft-mic-gain", "Snare In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("acousticsnare-in-ohright-mic-gain", "Snare In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInKickMicGain", "ClosedHiHat In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInSnareMicGain", "ClosedHiHat In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInHiHatMicGain", "ClosedHiHat In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInRackTomMicGain", "ClosedHiHat In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInFloorTomMicGain", "ClosedHiHat In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInRideMicGain", "ClosedHiHat In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInOverheadLeftMicGain", "ClosedHiHat In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mClosedHiHatInOverheadRightMicGain", "ClosedHiHat In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-kick-mic-gain", "Side Stick In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-snare-mic-gain", "Side Stick In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-hihat-mic-gain", "Side Stick In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-racktom-mic-gain", "Side Stick In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-floortom-mic-gain", "Side Stick In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-ride-mic-gain", "Side Stick In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-ohleft-mic-gain", "Side Stick In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("sidestick-in-ohright-mic-gain", "Side Stick In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInKickMicGain", "Open Hi Hat In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInSnareMicGain", "Open Hi Hat In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInHiHatMicGain", "Open Hi Hat In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInRackTomMicGain", "Open Hi Hat In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInFloorTomMicGain", "Open Hi Hat In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInRideMicGain", "Open Hi Hat In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInOverheadLeftMicGain", "Open Hi Hat In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mOpenHiHatInOverheadRightMicGain", "Open Hi Hat In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-kick-mic-gain", "Pedal Hi Hat In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-snare-mic-gain", "Pedal Hi Hat In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-hihat-mic-gain", "Pedal Hi Hat In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-racktom-mic-gain", "Pedal Hi Hat In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-floortom-mic-gain", "Pedal Hi Hat In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-ride-mic-gain", "Pedal Hi Hat In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-ohleft-mic-gain", "Pedal Hi Hat In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("pedalhihat-in-ohright-mic-gain", "Pedal Hi Hat In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mRackTomInKickMicGain", "RackTom In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRackTomInSnareMicGain", "RackTom In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRackTomInHiHatMicGain", "RackTom In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRackTomInRackTomMicGain", "RackTom In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRackTomInFloorTomMicGain", "RackTom In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRackTomInRideMicGain", "RackTom In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRackTomInOverheadLeftMicGain", "RackTom In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRackTomInOverheadRightMicGain", "RackTom In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-kick-mic-gain", "ClosedHiHat In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-snare-mic-gain", "ClosedHiHat In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-hihat-mic-gain", "ClosedHiHat In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-racktom-mic-gain", "ClosedHiHat In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-floortom-mic-gain", "ClosedHiHat In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-ride-mic-gain", "ClosedHiHat In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-ohleft-mic-gain", "ClosedHiHat In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("closedhihat-in-ohright-mic-gain", "ClosedHiHat In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInKickMicGain", "FloorTom In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInSnareMicGain", "FloorTom In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInHiHatMicGain", "FloorTom In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInRackTomMicGain", "FloorTom In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInFloorTomMicGain", "FloorTom In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInRideMicGain", "FloorTom In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInOverheadLeftMicGain", "FloorTom In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mFloorTomInOverheadRightMicGain", "FloorTom In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-kick-mic-gain", "Open Hi Hat In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-snare-mic-gain", "Open Hi Hat In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-hihat-mic-gain", "Open Hi Hat In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-racktom-mic-gain", "Open Hi Hat In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-floortom-mic-gain", "Open Hi Hat In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-ride-mic-gain", "Open Hi Hat In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-ohleft-mic-gain", "Open Hi Hat In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("openhihat-in-ohright-mic-gain", "Open Hi Hat In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mRideBellInKickMicGain", "Ride Bell In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideBellInSnareMicGain", "Ride Bell In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideBellInHiHatMicGain", "Ride Bell In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideBellInRackTomMicGain", "Ride Bell In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideBellInFloorTomMicGain", "Ride Bell In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideBellInRideMicGain", "Ride Bell In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideBellInOverheadLeftMicGain", "Ride Bell In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideBellInOverheadRightMicGain", "Ride Bell In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-kick-mic-gain", "RackTom In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-snare-mic-gain", "RackTom In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-hihat-mic-gain", "RackTom In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-racktom-mic-gain", "RackTom In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-floortom-mic-gain", "RackTom In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-ride-mic-gain", "RackTom In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-ohleft-mic-gain", "RackTom In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("racktom-in-ohright-mic-gain", "RackTom In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInKickMicGain", "Ride Cymbal In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInSnareMicGain", "Ride Cymbal In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInHiHatMicGain", "Ride Cymbal In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInRackTomMicGain", "Ride Cymbal In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInFloorTomMicGain", "Ride Cymbal In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInRideMicGain", "Ride Cymbal In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInOverheadLeftMicGain", "Ride Cymbal In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mRideCymbalInOverheadRightMicGain", "Ride Cymbal In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-kick-mic-gain", "FloorTom In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-snare-mic-gain", "FloorTom In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-hihat-mic-gain", "FloorTom In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-racktom-mic-gain", "FloorTom In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-floortom-mic-gain", "FloorTom In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-ride-mic-gain", "FloorTom In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-ohleft-mic-gain", "FloorTom In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("floortom-in-ohright-mic-gain", "FloorTom In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InKickMicGain", "Crash Cymbal 1 In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InSnareMicGain", "Crash Cymbal 1 In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InHiHatMicGain", "Crash Cymbal 1 In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InRackTomMicGain", "Crash Cymbal 1 In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InFloorTomMicGain", "Crash Cymbal 1 In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InRideMicGain", "Crash Cymbal 1 In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InOverheadLeftMicGain", "Crash Cymbal 1 In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal1InOverheadRightMicGain", "Crash Cymbal 1 In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-kick-mic-gain", "Ride Bell In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-snare-mic-gain", "Ride Bell In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-hihat-mic-gain", "Ride Bell In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-racktom-mic-gain", "Ride Bell In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-floortom-mic-gain", "Ride Bell In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-ride-mic-gain", "Ride Bell In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-ohleft-mic-gain", "Ride Bell In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridebell-in-ohright-mic-gain", "Ride Bell In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
 
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInKickMicGain", "Crash Cymbal 2 In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInSnareMicGain", "Crash Cymbal 2 In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInHiHatMicGain", "Crash Cymbal 2 In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInRackTomMicGain", "Crash Cymbal 2 In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInFloorTomMicGain", "Crash Cymbal 2 In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInRideMicGain", "Crash Cymbal 2 In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInOverheadLeftMicGain", "Crash Cymbal 2 In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
-std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInOverheadRightMicGain", "Crash Cymbal 2 In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-kick-mic-gain", "Ride Cymbal In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-snare-mic-gain", "Ride Cymbal In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-hihat-mic-gain", "Ride Cymbal In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-racktom-mic-gain", "Ride Cymbal In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-floortom-mic-gain", "Ride Cymbal In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-ride-mic-gain", "Ride Cymbal In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-ohleft-mic-gain", "Ride Cymbal In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("ridecymbal-in-ohright-mic-gain", "Ride Cymbal In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-kick-mic-gain", "Crash Cymbal 1 In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-snare-mic-gain", "Crash Cymbal 1 In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-hihat-mic-gain", "Crash Cymbal 1 In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-racktom-mic-gain", "Crash Cymbal 1 In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-floortom-mic-gain", "Crash Cymbal 1 In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-ride-mic-gain", "Crash Cymbal 1 In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-ohleft-mic-gain", "Crash Cymbal 1 In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal1-in-ohright-mic-gain", "Crash Cymbal 1 In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-kick-mic-gain", "Crash Cymbal 2 In Kick Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-snare-mic-gain", "Crash Cymbal 2 In Snare Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-hihat-mic-gain", "Crash Cymbal 2 In Hi Hat Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-racktom-mic-gain", "Crash Cymbal 2 In Rack Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-floortom-mic-gain", "Crash Cymbal 2 In Floor Tom Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-ride-mic-gain", "Crash Cymbal 2 In Ride Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-ohleft-mic-gain", "Crash Cymbal 2 In Overhead Left Mic Gain", 0.0f, 1.0f, 1.0f),
+std::make_unique<juce::AudioParameterFloat>("crashcymbal2-in-ohright-mic-gain", "Crash Cymbal 2 In Overhead Right Mic Gain", 0.0f, 1.0f, 1.0f),
+
 
 		})
 #endif
 {
 	mFormatManager.registerBasicFormats();
 
-	mKickInKickMicGain = mParameters.getRawParameterValue("mKickInKickMicGain");
-	mKickInSnareMicGain = mParameters.getRawParameterValue("mKickInSnareMicGain");
-	mKickInHiHatMicGain = mParameters.getRawParameterValue("mKickInHiHatMicGain");
-	mKickInRackTomMicGain = mParameters.getRawParameterValue("mKickInRackTomMicGain");
-	mKickInFloorTomMicGain = mParameters.getRawParameterValue("mKickInFloorTomMicGain");
-	mKickInRideMicGain = mParameters.getRawParameterValue("mKickInRideMicGain");
-	mKickInOverheadLeftMicGain = mParameters.getRawParameterValue("mKickInOverheadLeftMicGain");
-	mKickInOverheadRightMicGain = mParameters.getRawParameterValue("mKickInOverheadRightMicGain");
+	mKickMicPanning = mParameterValueTreeState.getParameter("kick-mic-panning");
+	mSnareMicPanning = mParameterValueTreeState.getParameter("snare-mic-panning");
+	mHiHatMicPanning = mParameterValueTreeState.getParameter("hihat-mic-panning");
+	mRackTomMicPanning = mParameterValueTreeState.getParameter("racktom-mic-panning");
+	mFloorTomMicPanning = mParameterValueTreeState.getParameter("floortom-mic-panning");
+	mRideMicPanning = mParameterValueTreeState.getParameter("ride-mic-panning");
+	mOverheadLeftMicPanning = mParameterValueTreeState.getParameter("ohleft-mic-panning");
+	mOverheadRightMicPanning = mParameterValueTreeState.getParameter("ohright-mic-panning");
 
-	mSnareInKickMicGain = mParameters.getRawParameterValue("mSnareInKickMicGain");
-	mSnareInSnareMicGain = mParameters.getRawParameterValue("mSnareInSnareMicGain");
-	mSnareInHiHatMicGain = mParameters.getRawParameterValue("mSnareInHiHatMicGain");
-	mSnareInRackTomMicGain = mParameters.getRawParameterValue("mSnareInRackTomMicGain");
-	mSnareInFloorTomMicGain = mParameters.getRawParameterValue("mSnareInFloorTomMicGain");
-	mSnareInRideMicGain = mParameters.getRawParameterValue("mSnareInRideMicGain");
-	mSnareInOverheadLeftMicGain = mParameters.getRawParameterValue("mSnareInOverheadLeftMicGain");
-	mSnareInOverheadRightMicGain = mParameters.getRawParameterValue("mSnareInOverheadRightMicGain");
+	mKickInKickMicGain = mParameterValueTreeState.getParameter("bassdrum-in-kick-mic-gain");
+	mKickInSnareMicGain = mParameterValueTreeState.getParameter("bassdrum-in-snare-mic-gain");
+	mKickInHiHatMicGain = mParameterValueTreeState.getParameter("bassdrum-in-hihat-mic-gain");
+	mKickInRackTomMicGain = mParameterValueTreeState.getParameter("bassdrum-in-racktom-mic-gain");
+	mKickInFloorTomMicGain = mParameterValueTreeState.getParameter("bassdrum-in-floortom-mic-gain");
+	mKickInRideMicGain = mParameterValueTreeState.getParameter("bassdrum-in-ride-mic-gain");
+	mKickInOverheadLeftMicGain = mParameterValueTreeState.getParameter("bassdrum-in-ohleft-mic-gain");
+	mKickInOverheadRightMicGain = mParameterValueTreeState.getParameter("bassdrum-in-ohright-mic-gain");
 
-	mSideStickInKickMicGain = mParameters.getRawParameterValue("mSideStickInKickMicGain");
-	mSideStickInSnareMicGain = mParameters.getRawParameterValue("mSideStickInSnareMicGain");
-	mSideStickInHiHatMicGain = mParameters.getRawParameterValue("mSideStickInHiHatMicGain");
-	mSideStickInRackTomMicGain = mParameters.getRawParameterValue("mSideStickInRackTomMicGain");
-	mSideStickInFloorTomMicGain = mParameters.getRawParameterValue("mSideStickInFloorTomMicGain");
-	mSideStickInRideMicGain = mParameters.getRawParameterValue("mSideStickInRideMicGain");
-	mSideStickInOverheadLeftMicGain = mParameters.getRawParameterValue("mSideStickInOverheadLeftMicGain");
-	mSideStickInOverheadRightMicGain = mParameters.getRawParameterValue("mSideStickInOverheadRightMicGain");
+	mSnareInKickMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-kick-mic-gain");
+	mSnareInSnareMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-snare-mic-gain");
+	mSnareInHiHatMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-hihat-mic-gain");
+	mSnareInRackTomMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-racktom-mic-gain");
+	mSnareInFloorTomMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-floortom-mic-gain");
+	mSnareInRideMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-ride-mic-gain");
+	mSnareInOverheadLeftMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-ohleft-mic-gain");
+	mSnareInOverheadRightMicGain = mParameterValueTreeState.getParameter("acousticsnare-in-ohright-mic-gain");
 
-	mPedalHiHatInKickMicGain = mParameters.getRawParameterValue("mPedalHiHatInKickMicGain");
-	mPedalHiHatInSnareMicGain = mParameters.getRawParameterValue("mPedalHiHatInSnareMicGain");
-	mPedalHiHatInHiHatMicGain = mParameters.getRawParameterValue("mPedalHiHatInHiHatMicGain");
-	mPedalHiHatInRackTomMicGain = mParameters.getRawParameterValue("mPedalHiHatInRackTomMicGain");
-	mPedalHiHatInFloorTomMicGain = mParameters.getRawParameterValue("mPedalHiHatInFloorTomMicGain");
-	mPedalHiHatInRideMicGain = mParameters.getRawParameterValue("mPedalHiHatInRideMicGain");
-	mPedalHiHatInOverheadLeftMicGain = mParameters.getRawParameterValue("mPedalHiHatInOverheadLeftMicGain");
-	mPedalHiHatInOverheadRightMicGain = mParameters.getRawParameterValue("mPedalHiHatInOverheadRightMicGain");
+	mSideStickInKickMicGain = mParameterValueTreeState.getParameter("sidestick-in-kick-mic-gain");
+	mSideStickInSnareMicGain = mParameterValueTreeState.getParameter("sidestick-in-snare-mic-gain");
+	mSideStickInHiHatMicGain = mParameterValueTreeState.getParameter("sidestick-in-hihat-mic-gain");
+	mSideStickInRackTomMicGain = mParameterValueTreeState.getParameter("sidestick-in-racktom-mic-gain");
+	mSideStickInFloorTomMicGain = mParameterValueTreeState.getParameter("sidestick-in-floortom-mic-gain");
+	mSideStickInRideMicGain = mParameterValueTreeState.getParameter("sidestick-in-ride-mic-gain");
+	mSideStickInOverheadLeftMicGain = mParameterValueTreeState.getParameter("sidestick-in-ohleft-mic-gain");
+	mSideStickInOverheadRightMicGain = mParameterValueTreeState.getParameter("sidestick-in-ohright-mic-gain");
 
-	mClosedHiHatInKickMicGain = mParameters.getRawParameterValue("mClosedHiHatInKickMicGain");
-	mClosedHiHatInSnareMicGain = mParameters.getRawParameterValue("mClosedHiHatInSnareMicGain");
-	mClosedHiHatInHiHatMicGain = mParameters.getRawParameterValue("mClosedHiHatInHiHatMicGain");
-	mClosedHiHatInRackTomMicGain = mParameters.getRawParameterValue("mClosedHiHatInRackTomMicGain");
-	mClosedHiHatInFloorTomMicGain = mParameters.getRawParameterValue("mClosedHiHatInFloorTomMicGain");
-	mClosedHiHatInRideMicGain = mParameters.getRawParameterValue("mClosedHiHatInRideMicGain");
-	mClosedHiHatInOverheadLeftMicGain = mParameters.getRawParameterValue("mClosedHiHatInOverheadLeftMicGain");
-	mClosedHiHatInOverheadRightMicGain = mParameters.getRawParameterValue("mClosedHiHatInOverheadRightMicGain");
+	mPedalHiHatInKickMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-kick-mic-gain");
+	mPedalHiHatInSnareMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-snare-mic-gain");
+	mPedalHiHatInHiHatMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-hihat-mic-gain");
+	mPedalHiHatInRackTomMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-racktom-mic-gain");
+	mPedalHiHatInFloorTomMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-floortom-mic-gain");
+	mPedalHiHatInRideMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-ride-mic-gain");
+	mPedalHiHatInOverheadLeftMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-ohleft-mic-gain");
+	mPedalHiHatInOverheadRightMicGain = mParameterValueTreeState.getParameter("pedalhihat-in-ohright-mic-gain");
 
-	mOpenHiHatInKickMicGain = mParameters.getRawParameterValue("mOpenHiHatInKickMicGain");
-	mOpenHiHatInSnareMicGain = mParameters.getRawParameterValue("mOpenHiHatInSnareMicGain");
-	mOpenHiHatInHiHatMicGain = mParameters.getRawParameterValue("mOpenHiHatInHiHatMicGain");
-	mOpenHiHatInRackTomMicGain = mParameters.getRawParameterValue("mOpenHiHatInRackTomMicGain");
-	mOpenHiHatInFloorTomMicGain = mParameters.getRawParameterValue("mOpenHiHatInFloorTomMicGain");
-	mOpenHiHatInRideMicGain = mParameters.getRawParameterValue("mOpenHiHatInRideMicGain");
-	mOpenHiHatInOverheadLeftMicGain = mParameters.getRawParameterValue("mOpenHiHatInOverheadLeftMicGain");
-	mOpenHiHatInOverheadRightMicGain = mParameters.getRawParameterValue("mOpenHiHatInOverheadRightMicGain");
+	mClosedHiHatInKickMicGain = mParameterValueTreeState.getParameter("closedhihat-in-kick-mic-gain");
+	mClosedHiHatInSnareMicGain = mParameterValueTreeState.getParameter("closedhihat-in-snare-mic-gain");
+	mClosedHiHatInHiHatMicGain = mParameterValueTreeState.getParameter("closedhihat-in-hihat-mic-gain");
+	mClosedHiHatInRackTomMicGain = mParameterValueTreeState.getParameter("closedhihat-in-racktom-mic-gain");
+	mClosedHiHatInFloorTomMicGain = mParameterValueTreeState.getParameter("closedhihat-in-floortom-mic-gain");
+	mClosedHiHatInRideMicGain = mParameterValueTreeState.getParameter("closedhihat-in-ride-mic-gain");
+	mClosedHiHatInOverheadLeftMicGain = mParameterValueTreeState.getParameter("closedhihat-in-ohleft-mic-gain");
+	mClosedHiHatInOverheadRightMicGain = mParameterValueTreeState.getParameter("closedhihat-in-ohright-mic-gain");
 
-	mRackTomInKickMicGain = mParameters.getRawParameterValue("mRackTomInKickMicGain");
-	mRackTomInSnareMicGain = mParameters.getRawParameterValue("mRackTomInSnareMicGain");
-	mRackTomInHiHatMicGain = mParameters.getRawParameterValue("mRackTomInHiHatMicGain");
-	mRackTomInRackTomMicGain = mParameters.getRawParameterValue("mRackTomInRackTomMicGain");
-	mRackTomInFloorTomMicGain = mParameters.getRawParameterValue("mRackTomInFloorTomMicGain");
-	mRackTomInRideMicGain = mParameters.getRawParameterValue("mRackTomInRideMicGain");
-	mRackTomInOverheadLeftMicGain = mParameters.getRawParameterValue("mRackTomInOverheadLeftMicGain");
-	mRackTomInOverheadRightMicGain = mParameters.getRawParameterValue("mRackTomInOverheadRightMicGain");
+	mOpenHiHatInKickMicGain = mParameterValueTreeState.getParameter("openhihat-in-kick-mic-gain");
+	mOpenHiHatInSnareMicGain = mParameterValueTreeState.getParameter("openhihat-in-snare-mic-gain");
+	mOpenHiHatInHiHatMicGain = mParameterValueTreeState.getParameter("openhihat-in-hihat-mic-gain");
+	mOpenHiHatInRackTomMicGain = mParameterValueTreeState.getParameter("openhihat-in-racktom-mic-gain");
+	mOpenHiHatInFloorTomMicGain = mParameterValueTreeState.getParameter("openhihat-in-floortom-mic-gain");
+	mOpenHiHatInRideMicGain = mParameterValueTreeState.getParameter("openhihat-in-ride-mic-gain");
+	mOpenHiHatInOverheadLeftMicGain = mParameterValueTreeState.getParameter("openhihat-in-ohleft-mic-gain");
+	mOpenHiHatInOverheadRightMicGain = mParameterValueTreeState.getParameter("openhihat-in-ohright-mic-gain");
 
-	mFloorTomInKickMicGain = mParameters.getRawParameterValue("mFloorTomInKickMicGain");
-	mFloorTomInSnareMicGain = mParameters.getRawParameterValue("mFloorTomInSnareMicGain");
-	mFloorTomInHiHatMicGain = mParameters.getRawParameterValue("mFloorTomInHiHatMicGain");
-	mFloorTomInRackTomMicGain = mParameters.getRawParameterValue("mFloorTomInRackTomMicGain");
-	mFloorTomInFloorTomMicGain = mParameters.getRawParameterValue("mFloorTomInFloorTomMicGain");
-	mFloorTomInRideMicGain = mParameters.getRawParameterValue("mFloorTomInRideMicGain");
-	mFloorTomInOverheadLeftMicGain = mParameters.getRawParameterValue("mFloorTomInOverheadLeftMicGain");
-	mFloorTomInOverheadRightMicGain = mParameters.getRawParameterValue("mFloorTomInOverheadRightMicGain");
+	mRackTomInKickMicGain = mParameterValueTreeState.getParameter("racktom-in-kick-mic-gain");
+	mRackTomInSnareMicGain = mParameterValueTreeState.getParameter("racktom-in-snare-mic-gain");
+	mRackTomInHiHatMicGain = mParameterValueTreeState.getParameter("racktom-in-hihat-mic-gain");
+	mRackTomInRackTomMicGain = mParameterValueTreeState.getParameter("racktom-in-racktom-mic-gain");
+	mRackTomInFloorTomMicGain = mParameterValueTreeState.getParameter("racktom-in-floortom-mic-gain");
+	mRackTomInRideMicGain = mParameterValueTreeState.getParameter("racktom-in-ride-mic-gain");
+	mRackTomInOverheadLeftMicGain = mParameterValueTreeState.getParameter("racktom-in-ohleft-mic-gain");
+	mRackTomInOverheadRightMicGain = mParameterValueTreeState.getParameter("racktom-in-ohright-mic-gain");
 
-	mRideBellInKickMicGain = mParameters.getRawParameterValue("mRideBellInKickMicGain");
-	mRideBellInSnareMicGain = mParameters.getRawParameterValue("mRideBellInSnareMicGain");
-	mRideBellInHiHatMicGain = mParameters.getRawParameterValue("mRideBellInHiHatMicGain");
-	mRideBellInRackTomMicGain = mParameters.getRawParameterValue("mRideBellInRackTomMicGain");
-	mRideBellInFloorTomMicGain = mParameters.getRawParameterValue("mRideBellInFloorTomMicGain");
-	mRideBellInRideMicGain = mParameters.getRawParameterValue("mRideBellInRideMicGain");
-	mRideBellInOverheadLeftMicGain = mParameters.getRawParameterValue("mRideBellInOverheadLeftMicGain");
-	mRideBellInOverheadRightMicGain = mParameters.getRawParameterValue("mRideBellInOverheadRightMicGain");
+	mFloorTomInKickMicGain = mParameterValueTreeState.getParameter("floortom-in-kick-mic-gain");
+	mFloorTomInSnareMicGain = mParameterValueTreeState.getParameter("floortom-in-snare-mic-gain");
+	mFloorTomInHiHatMicGain = mParameterValueTreeState.getParameter("floortom-in-hihat-mic-gain");
+	mFloorTomInRackTomMicGain = mParameterValueTreeState.getParameter("floortom-in-racktom-mic-gain");
+	mFloorTomInFloorTomMicGain = mParameterValueTreeState.getParameter("floortom-in-floortom-mic-gain");
+	mFloorTomInRideMicGain = mParameterValueTreeState.getParameter("floortom-in-ride-mic-gain");
+	mFloorTomInOverheadLeftMicGain = mParameterValueTreeState.getParameter("floortom-in-ohleft-mic-gain");
+	mFloorTomInOverheadRightMicGain = mParameterValueTreeState.getParameter("floortom-in-ohright-mic-gain");
 
-	mRideCymbalInKickMicGain = mParameters.getRawParameterValue("mRideCymbalInKickMicGain");
-	mRideCymbalInSnareMicGain = mParameters.getRawParameterValue("mRideCymbalInSnareMicGain");
-	mRideCymbalInHiHatMicGain = mParameters.getRawParameterValue("mRideCymbalInHiHatMicGain");
-	mRideCymbalInRackTomMicGain = mParameters.getRawParameterValue("mRideCymbalInRackTomMicGain");
-	mRideCymbalInFloorTomMicGain = mParameters.getRawParameterValue("mRideCymbalInFloorTomMicGain");
-	mRideCymbalInRideMicGain = mParameters.getRawParameterValue("mRideCymbalInRideMicGain");
-	mRideCymbalInOverheadLeftMicGain = mParameters.getRawParameterValue("mRideCymbalInOverheadLeftMicGain");
-	mRideCymbalInOverheadRightMicGain = mParameters.getRawParameterValue("mRideCymbalInOverheadRightMicGain");
+	mRideBellInKickMicGain = mParameterValueTreeState.getParameter("ridebell-in-kick-mic-gain");
+	mRideBellInSnareMicGain = mParameterValueTreeState.getParameter("ridebell-in-snare-mic-gain");
+	mRideBellInHiHatMicGain = mParameterValueTreeState.getParameter("ridebell-in-hihat-mic-gain");
+	mRideBellInRackTomMicGain = mParameterValueTreeState.getParameter("ridebell-in-racktom-mic-gain");
+	mRideBellInFloorTomMicGain = mParameterValueTreeState.getParameter("ridebell-in-floortom-mic-gain");
+	mRideBellInRideMicGain = mParameterValueTreeState.getParameter("ridebell-in-ride-mic-gain");
+	mRideBellInOverheadLeftMicGain = mParameterValueTreeState.getParameter("ridebell-in-ohleft-mic-gain");
+	mRideBellInOverheadRightMicGain = mParameterValueTreeState.getParameter("ridebell-in-ohright-mic-gain");
 
-	mCrashCymbal1InKickMicGain = mParameters.getRawParameterValue("mCrashCymbal1InKickMicGain");
-	mCrashCymbal1InSnareMicGain = mParameters.getRawParameterValue("mCrashCymbal1InSnareMicGain");
-	mCrashCymbal1InHiHatMicGain = mParameters.getRawParameterValue("mCrashCymbal1InHiHatMicGain");
-	mCrashCymbal1InRackTomMicGain = mParameters.getRawParameterValue("mCrashCymbal1InRackTomMicGain");
-	mCrashCymbal1InFloorTomMicGain = mParameters.getRawParameterValue("mCrashCymbal1InFloorTomMicGain");
-	mCrashCymbal1InRideMicGain = mParameters.getRawParameterValue("mCrashCymbal1InRideMicGain");
-	mCrashCymbal1InOverheadLeftMicGain = mParameters.getRawParameterValue("mCrashCymbal1InOverheadLeftMicGain");
-	mCrashCymbal1InOverheadRightMicGain = mParameters.getRawParameterValue("mCrashCymbal1InOverheadRightMicGain");
+	mRideCymbalInKickMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-kick-mic-gain");
+	mRideCymbalInSnareMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-snare-mic-gain");
+	mRideCymbalInHiHatMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-hihat-mic-gain");
+	mRideCymbalInRackTomMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-racktom-mic-gain");
+	mRideCymbalInFloorTomMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-floortom-mic-gain");
+	mRideCymbalInRideMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-ride-mic-gain");
+	mRideCymbalInOverheadLeftMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-ohleft-mic-gain");
+	mRideCymbalInOverheadRightMicGain = mParameterValueTreeState.getParameter("ridecymbal-in-ohright-mic-gain");
 
-	mCrashCymbal2InInKickMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInKickMicGain");
-	mCrashCymbal2InInSnareMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInSnareMicGain");
-	mCrashCymbal2InInHiHatMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInHiHatMicGain");
-	mCrashCymbal2InInRackTomMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInRackTomMicGain");
-	mCrashCymbal2InInFloorTomMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInFloorTomMicGain");
-	mCrashCymbal2InInRideMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInRideMicGain");
-	mCrashCymbal2InInOverheadLeftMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInOverheadLeftMicGain");
-	mCrashCymbal2InInOverheadRightMicGain = mParameters.getRawParameterValue("mCrashCymbal2InInOverheadRightMicGain");
+	mCrashCymbal1InKickMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-kick-mic-gain");
+	mCrashCymbal1InSnareMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-snare-mic-gain");
+	mCrashCymbal1InHiHatMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-hihat-mic-gain");
+	mCrashCymbal1InRackTomMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-racktom-mic-gain");
+	mCrashCymbal1InFloorTomMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-floortom-mic-gain");
+	mCrashCymbal1InRideMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-ride-mic-gain");
+	mCrashCymbal1InOverheadLeftMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-ohleft-mic-gain");
+	mCrashCymbal1InOverheadRightMicGain = mParameterValueTreeState.getParameter("crashcymbal1-in-ohright-mic-gain");
 
-	std::vector<std::atomic<float>*> kickInGains = { mKickInKickMicGain, mKickInSnareMicGain, mKickInHiHatMicGain, mKickInRackTomMicGain, mKickInFloorTomMicGain,mKickInRideMicGain, mKickInOverheadLeftMicGain, mKickInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> snareInGains = { mSnareInKickMicGain, mSnareInSnareMicGain, mSnareInHiHatMicGain, mSnareInRackTomMicGain, mSnareInFloorTomMicGain,mSnareInRideMicGain, mSnareInOverheadLeftMicGain, mSnareInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> sideStickInGains = { mSideStickInKickMicGain, mSideStickInSnareMicGain, mSideStickInHiHatMicGain, mSideStickInRackTomMicGain, mSideStickInFloorTomMicGain,mSideStickInRideMicGain, mSideStickInOverheadLeftMicGain, mSideStickInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> pedalHiHatInGains = { mPedalHiHatInKickMicGain, mPedalHiHatInSnareMicGain, mPedalHiHatInHiHatMicGain, mPedalHiHatInRackTomMicGain, mPedalHiHatInFloorTomMicGain,mPedalHiHatInRideMicGain, mPedalHiHatInOverheadLeftMicGain, mPedalHiHatInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> closedHiHatInGains = { mClosedHiHatInKickMicGain, mClosedHiHatInSnareMicGain, mClosedHiHatInHiHatMicGain, mClosedHiHatInRackTomMicGain, mClosedHiHatInFloorTomMicGain,mClosedHiHatInRideMicGain, mClosedHiHatInOverheadLeftMicGain, mClosedHiHatInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> openHiHatInGains = { mOpenHiHatInKickMicGain, mOpenHiHatInSnareMicGain, mOpenHiHatInHiHatMicGain, mOpenHiHatInRackTomMicGain, mOpenHiHatInFloorTomMicGain,mOpenHiHatInRideMicGain, mOpenHiHatInOverheadLeftMicGain, mOpenHiHatInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> rackTomInGains = { mRackTomInKickMicGain, mRackTomInSnareMicGain, mRackTomInHiHatMicGain, mRackTomInRackTomMicGain, mRackTomInFloorTomMicGain,mRackTomInRideMicGain, mRackTomInOverheadLeftMicGain, mRackTomInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> floorTomInGains = { mFloorTomInKickMicGain, mFloorTomInSnareMicGain, mFloorTomInHiHatMicGain, mFloorTomInRackTomMicGain, mFloorTomInFloorTomMicGain,mFloorTomInRideMicGain, mFloorTomInOverheadLeftMicGain, mFloorTomInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> rideBellInGains = { mRideBellInKickMicGain, mRideBellInSnareMicGain, mRideBellInHiHatMicGain, mRideBellInRackTomMicGain, mRideBellInFloorTomMicGain,mRideBellInRideMicGain, mRideBellInOverheadLeftMicGain, mRideBellInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> rideCymbalInGains = { mRideCymbalInKickMicGain, mRideCymbalInSnareMicGain, mRideCymbalInHiHatMicGain, mRideCymbalInRackTomMicGain, mRideCymbalInFloorTomMicGain,mRideCymbalInRideMicGain, mRideCymbalInOverheadLeftMicGain, mRideCymbalInOverheadRightMicGain };
-	std::vector<std::atomic<float>*> crashCymbal1InGains = { mCrashCymbal1InKickMicGain, mCrashCymbal1InSnareMicGain, mCrashCymbal1InHiHatMicGain, mCrashCymbal1InRackTomMicGain, mCrashCymbal1InFloorTomMicGain,mCrashCymbal1InRideMicGain, mCrashCymbal1InOverheadLeftMicGain, mCrashCymbal1InOverheadRightMicGain };
-	std::vector<std::atomic<float>*> crashCymbal2InInGains = { mCrashCymbal2InInKickMicGain, mCrashCymbal2InInSnareMicGain, mCrashCymbal2InInHiHatMicGain, mCrashCymbal2InInRackTomMicGain, mCrashCymbal2InInFloorTomMicGain,mCrashCymbal2InInRideMicGain, mCrashCymbal2InInOverheadLeftMicGain, mCrashCymbal2InInOverheadRightMicGain };
-	mSampleGains = { 
-		snareInGains, 
-		kickInGains, 
-		closedHiHatInGains,
-		crashCymbal1InGains, 
-		crashCymbal2InInGains, 
-		floorTomInGains, 
-		openHiHatInGains, 
-		pedalHiHatInGains,
-		rackTomInGains,
-		rideBellInGains, 
-		rideCymbalInGains,
-		sideStickInGains, 
-	};
+	mCrashCymbal2InInKickMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-kick-mic-gain");
+	mCrashCymbal2InInSnareMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-snare-mic-gain");
+	mCrashCymbal2InInHiHatMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-hihat-mic-gain");
+	mCrashCymbal2InInRackTomMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-racktom-mic-gain");
+	mCrashCymbal2InInFloorTomMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-floortom-mic-gain");
+	mCrashCymbal2InInRideMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-ride-mic-gain");
+	mCrashCymbal2InInOverheadLeftMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-ohleft-mic-gain");
+	mCrashCymbal2InInOverheadRightMicGain = mParameterValueTreeState.getParameter("crashcymbal2-in-ohright-mic-gain");
+
+	std::vector<juce::RangedAudioParameter*> kickInGains = { mKickInKickMicGain, mKickInSnareMicGain, mKickInHiHatMicGain, mKickInRackTomMicGain, mKickInFloorTomMicGain,mKickInRideMicGain, mKickInOverheadLeftMicGain, mKickInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> snareInGains = { mSnareInKickMicGain, mSnareInSnareMicGain, mSnareInHiHatMicGain, mSnareInRackTomMicGain, mSnareInFloorTomMicGain,mSnareInRideMicGain, mSnareInOverheadLeftMicGain, mSnareInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> sideStickInGains = { mSideStickInKickMicGain, mSideStickInSnareMicGain, mSideStickInHiHatMicGain, mSideStickInRackTomMicGain, mSideStickInFloorTomMicGain,mSideStickInRideMicGain, mSideStickInOverheadLeftMicGain, mSideStickInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> pedalHiHatInGains = { mPedalHiHatInKickMicGain, mPedalHiHatInSnareMicGain, mPedalHiHatInHiHatMicGain, mPedalHiHatInRackTomMicGain, mPedalHiHatInFloorTomMicGain,mPedalHiHatInRideMicGain, mPedalHiHatInOverheadLeftMicGain, mPedalHiHatInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> closedHiHatInGains = { mClosedHiHatInKickMicGain, mClosedHiHatInSnareMicGain, mClosedHiHatInHiHatMicGain, mClosedHiHatInRackTomMicGain, mClosedHiHatInFloorTomMicGain,mClosedHiHatInRideMicGain, mClosedHiHatInOverheadLeftMicGain, mClosedHiHatInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> openHiHatInGains = { mOpenHiHatInKickMicGain, mOpenHiHatInSnareMicGain, mOpenHiHatInHiHatMicGain, mOpenHiHatInRackTomMicGain, mOpenHiHatInFloorTomMicGain,mOpenHiHatInRideMicGain, mOpenHiHatInOverheadLeftMicGain, mOpenHiHatInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> rackTomInGains = { mRackTomInKickMicGain, mRackTomInSnareMicGain, mRackTomInHiHatMicGain, mRackTomInRackTomMicGain, mRackTomInFloorTomMicGain,mRackTomInRideMicGain, mRackTomInOverheadLeftMicGain, mRackTomInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> floorTomInGains = { mFloorTomInKickMicGain, mFloorTomInSnareMicGain, mFloorTomInHiHatMicGain, mFloorTomInRackTomMicGain, mFloorTomInFloorTomMicGain,mFloorTomInRideMicGain, mFloorTomInOverheadLeftMicGain, mFloorTomInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> rideBellInGains = { mRideBellInKickMicGain, mRideBellInSnareMicGain, mRideBellInHiHatMicGain, mRideBellInRackTomMicGain, mRideBellInFloorTomMicGain,mRideBellInRideMicGain, mRideBellInOverheadLeftMicGain, mRideBellInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> rideCymbalInGains = { mRideCymbalInKickMicGain, mRideCymbalInSnareMicGain, mRideCymbalInHiHatMicGain, mRideCymbalInRackTomMicGain, mRideCymbalInFloorTomMicGain,mRideCymbalInRideMicGain, mRideCymbalInOverheadLeftMicGain, mRideCymbalInOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> crashCymbal1InGains = { mCrashCymbal1InKickMicGain, mCrashCymbal1InSnareMicGain, mCrashCymbal1InHiHatMicGain, mCrashCymbal1InRackTomMicGain, mCrashCymbal1InFloorTomMicGain,mCrashCymbal1InRideMicGain, mCrashCymbal1InOverheadLeftMicGain, mCrashCymbal1InOverheadRightMicGain };
+	std::vector<juce::RangedAudioParameter*> crashCymbal2InInGains = { mCrashCymbal2InInKickMicGain, mCrashCymbal2InInSnareMicGain, mCrashCymbal2InInHiHatMicGain, mCrashCymbal2InInRackTomMicGain, mCrashCymbal2InInFloorTomMicGain,mCrashCymbal2InInRideMicGain, mCrashCymbal2InInOverheadLeftMicGain, mCrashCymbal2InInOverheadRightMicGain };
+
 
 	for (int sampleIndex = 0; sampleIndex < constants::samplesSize; sampleIndex++) {
 		std::string sampleName = constants::samplesNames[sampleIndex];
 		int midiNote = constants::samplesMidiNotes[sampleIndex];
-		auto micGains = mSampleGains[sampleIndex];
 
 		for (int microphoneIndex = 0; microphoneIndex < constants::microphonesSize; microphoneIndex++) {
 			std::string microphoneName = constants::microphoneNames[microphoneIndex];
 			std::string resourceName = sampleName + microphoneName + "mic_wav";
+			std::string micGainParameterName = sampleName + "-in-" + microphoneName + "-mic-gain";
+			std::string micPanningParameterName = microphoneName + "-mic-panning";
 			auto voice = new DrumSamplerVoice();
-			auto micGain = micGains[microphoneIndex];
+			auto gainParameter = mParameterValueTreeState.getParameter(micGainParameterName);
+			auto panningParameter = mParameterValueTreeState.getParameter(micPanningParameterName);
 
 			int dataSizeInBytes;
 			const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
@@ -301,7 +310,7 @@ std::make_unique<juce::AudioParameterFloat>("mCrashCymbal2InInOverheadRightMicGa
 				bool isOpenHiHat = sampleIndex == 6; // 0.1, 0.1, 10.0
 				double releaseTimeSecs = isOpenHiHat ? 0.1 : 10.0;
 
-				DrumSamplerSound* sound = new DrumSamplerSound(juce::String(resourceName), *reader, range, micGain, midiNote, 0.0, releaseTimeSecs, 5.0);
+				DrumSamplerSound* sound = new DrumSamplerSound(juce::String(resourceName), *reader, range, gainParameter, panningParameter, midiNote, 0.0, releaseTimeSecs, 5.0);
 
 				switch (microphoneIndex)
 				{
@@ -517,10 +526,6 @@ void AcresBasementKitAudioProcessor::noteOnSynthesiser(int midiNoteNumber) {
 	mOverheadRightMicSynthesiser.noteOn(10, midiNoteNumber, 1.0f);
 }
 
-std::vector<std::vector<std::atomic<float>*>> AcresBasementKitAudioProcessor::getSampleGains() {
-	return mSampleGains;
-}
-
 //==============================================================================
 bool AcresBasementKitAudioProcessor::hasEditor() const
 {
@@ -535,7 +540,7 @@ juce::AudioProcessorEditor* AcresBasementKitAudioProcessor::createEditor()
 //==============================================================================
 void AcresBasementKitAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
 {
-	auto state = mParameters.copyState();
+	auto state = mParameterValueTreeState.copyState();
 	std::unique_ptr<juce::XmlElement> xml(state.createXml());
 	copyXmlToBinary(*xml, destData);
 }
@@ -545,8 +550,8 @@ void AcresBasementKitAudioProcessor::setStateInformation(const void* data, int s
 	std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
 
 	if (xmlState.get() != nullptr)
-		if (xmlState->hasTagName(mParameters.state.getType()))
-			mParameters.replaceState(juce::ValueTree::fromXml(*xmlState));
+		if (xmlState->hasTagName(mParameterValueTreeState.state.getType()))
+			mParameterValueTreeState.replaceState(juce::ValueTree::fromXml(*xmlState));
 }
 
 //==============================================================================

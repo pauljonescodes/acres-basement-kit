@@ -23,6 +23,7 @@
 #include <JuceHeader.h>
 #include "DrumComponent.h"
 #include "MixerComponent.h"
+#include "PanningComponent.h"
 //[/Headers]
 
 
@@ -46,6 +47,7 @@ public:
     //[UserMethods]     -- You can add your own custom methods in this section.
     DrumComponent* MainComponent::getDrumComponent();
     MixerComponent* MainComponent::getMixerComponent();
+    PanningComponent* MainComponent::getPanningComponent();
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -55,7 +57,7 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-   
+
     //[/UserVariables]
 
     //==============================================================================

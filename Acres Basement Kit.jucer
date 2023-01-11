@@ -2,12 +2,12 @@
 
 <JUCERPROJECT id="t1Dw6t" name="Acres Basement Kit" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
-              jucerFormatVersion="1" version="0.0.1" companyWebsite="www.jaulrecords.com"
+              jucerFormatVersion="1" version="0.1.1" companyWebsite="www.jaulrecords.com"
               companyName="Jaul DSP" companyCopyright="2022" companyEmail="studio@jaulrecords.com"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="KeEiJ1" name="Acres Basement Kit">
     <GROUP id="{63373324-B844-4169-6047-6FC1761960A4}" name="Samples">
-      <GROUP id="{91D398C1-BD27-7B73-9500-647542423407}" name="acoustic-snare">
+      <GROUP id="{91D398C1-BD27-7B73-9500-647542423407}" name="acousticsnare">
         <FILE id="hNL1aS" name="acoustic-snare-floortom-mic.wav" compile="0"
               resource="1" file="Samples/acoustic-snare/acoustic-snare-floortom-mic.wav"/>
         <FILE id="iXV90i" name="acoustic-snare-hihat-mic.wav" compile="0" resource="1"
@@ -25,7 +25,7 @@
         <FILE id="rnVmUw" name="acoustic-snare-snare-mic.wav" compile="0" resource="1"
               file="Samples/acoustic-snare/acoustic-snare-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{7BE8FF76-B18E-2C00-6317-F2ED6EAB5760}" name="bass-drum">
+      <GROUP id="{7BE8FF76-B18E-2C00-6317-F2ED6EAB5760}" name="bassdrum">
         <FILE id="LddwsG" name="bass-drum-floortom-mic.wav" compile="0" resource="1"
               file="Samples/bass-drum/bass-drum-floortom-mic.wav"/>
         <FILE id="nX8b1t" name="bass-drum-hihat-mic.wav" compile="0" resource="1"
@@ -43,7 +43,7 @@
         <FILE id="Immycq" name="bass-drum-snare-mic.wav" compile="0" resource="1"
               file="Samples/bass-drum/bass-drum-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{67B96493-7A0E-4123-7E9D-7F510ED72CF1}" name="closed-hihat">
+      <GROUP id="{67B96493-7A0E-4123-7E9D-7F510ED72CF1}" name="closedhihat">
         <FILE id="yFLSbz" name="closed-hihat-floortom-mic.wav" compile="0"
               resource="1" file="Samples/closed-hihat/closed-hihat-floortom-mic.wav"/>
         <FILE id="hHfznW" name="closed-hihat-hihat-mic.wav" compile="0" resource="1"
@@ -61,7 +61,7 @@
         <FILE id="AEjk01" name="closed-hihat-snare-mic.wav" compile="0" resource="1"
               file="Samples/closed-hihat/closed-hihat-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{20E78338-BA44-349C-E908-8FB3C25A7166}" name="crash-cymbal-1">
+      <GROUP id="{20E78338-BA44-349C-E908-8FB3C25A7166}" name="crashcymbal1">
         <FILE id="PHaV03" name="crash-cymbal-1-floortom-mic.wav" compile="0"
               resource="1" file="Samples/crash-cymbal-1/crash-cymbal-1-floortom-mic.wav"/>
         <FILE id="B8inJx" name="crash-cymbal-1-hihat-mic.wav" compile="0" resource="1"
@@ -79,7 +79,7 @@
         <FILE id="bpNWQd" name="crash-cymbal-1-snare-mic.wav" compile="0" resource="1"
               file="Samples/crash-cymbal-1/crash-cymbal-1-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{5005FF54-D9C7-B07E-AC5C-0C9FA55CC2FB}" name="crash-cymbal-2">
+      <GROUP id="{5005FF54-D9C7-B07E-AC5C-0C9FA55CC2FB}" name="crashcymbal2">
         <FILE id="fdTTwe" name="crash-cymbal-2-floortom-mic.wav" compile="0"
               resource="1" file="Samples/crash-cymbal-2/crash-cymbal-2-floortom-mic.wav"/>
         <FILE id="dDgw88" name="crash-cymbal-2-hihat-mic.wav" compile="0" resource="1"
@@ -97,7 +97,7 @@
         <FILE id="PN7vd1" name="crash-cymbal-2-snare-mic.wav" compile="0" resource="1"
               file="Samples/crash-cymbal-2/crash-cymbal-2-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{39BAAFFE-65F9-45DE-5CA3-8F573F6471A8}" name="floor-tom">
+      <GROUP id="{39BAAFFE-65F9-45DE-5CA3-8F573F6471A8}" name="floortom">
         <FILE id="CVFrYc" name="floor-tom-floortom-mic.wav" compile="0" resource="1"
               file="Samples/floor-tom/floor-tom-floortom-mic.wav"/>
         <FILE id="VrTwYF" name="floor-tom-hihat-mic.wav" compile="0" resource="1"
@@ -115,7 +115,7 @@
         <FILE id="lofVp9" name="floor-tom-snare-mic.wav" compile="0" resource="1"
               file="Samples/floor-tom/floor-tom-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{C7025248-5680-66CF-3436-FCA21EC0616D}" name="open-hihat">
+      <GROUP id="{C7025248-5680-66CF-3436-FCA21EC0616D}" name="openhihat">
         <FILE id="hbuCM9" name="open-hihat-floortom-mic.wav" compile="0" resource="1"
               file="Samples/open-hihat/open-hihat-floortom-mic.wav"/>
         <FILE id="cMEK91" name="open-hihat-hihat-mic.wav" compile="0" resource="1"
@@ -133,7 +133,7 @@
         <FILE id="g8sOx2" name="open-hihat-snare-mic.wav" compile="0" resource="1"
               file="Samples/open-hihat/open-hihat-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{AED3644D-9AA4-F510-77A6-9553E4D522B9}" name="pedal-hihat">
+      <GROUP id="{AED3644D-9AA4-F510-77A6-9553E4D522B9}" name="pedalhihat">
         <FILE id="U1ATOL" name="pedal-hihat-floortom-mic.wav" compile="0" resource="1"
               file="Samples/pedal-hihat/pedal-hihat-floortom-mic.wav"/>
         <FILE id="rnzM4a" name="pedal-hihat-hihat-mic.wav" compile="0" resource="1"
@@ -151,7 +151,7 @@
         <FILE id="FEkngx" name="pedal-hihat-snare-mic.wav" compile="0" resource="1"
               file="Samples/pedal-hihat/pedal-hihat-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{92EC5DFE-E98C-75AB-A482-9890099161AF}" name="rack-tom">
+      <GROUP id="{92EC5DFE-E98C-75AB-A482-9890099161AF}" name="racktom">
         <FILE id="ahD1Ca" name="rack-tom-floortom-mic.wav" compile="0" resource="1"
               file="Samples/rack-tom/rack-tom-floortom-mic.wav"/>
         <FILE id="VBtcaD" name="rack-tom-hihat-mic.wav" compile="0" resource="1"
@@ -169,7 +169,7 @@
         <FILE id="GFnVGk" name="rack-tom-snare-mic.wav" compile="0" resource="1"
               file="Samples/rack-tom/rack-tom-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{F5C5CE73-0135-C859-2AED-B6132FEE7C37}" name="ride-bell">
+      <GROUP id="{F5C5CE73-0135-C859-2AED-B6132FEE7C37}" name="ridebell">
         <FILE id="sqoj86" name="ride-bell-floortom-mic.wav" compile="0" resource="1"
               file="Samples/ride-bell/ride-bell-floortom-mic.wav"/>
         <FILE id="dAt7KY" name="ride-bell-hihat-mic.wav" compile="0" resource="1"
@@ -187,7 +187,7 @@
         <FILE id="C0FL3X" name="ride-bell-snare-mic.wav" compile="0" resource="1"
               file="Samples/ride-bell/ride-bell-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{FFD24E5B-EB7A-E020-AFBD-CA1C1C0A58D0}" name="ride-cymbal">
+      <GROUP id="{FFD24E5B-EB7A-E020-AFBD-CA1C1C0A58D0}" name="ridecymbal">
         <FILE id="i9pUHI" name="ride-cymbal-floortom-mic.wav" compile="0" resource="1"
               file="Samples/ride-cymbal/ride-cymbal-floortom-mic.wav"/>
         <FILE id="ovHQSk" name="ride-cymbal-hihat-mic.wav" compile="0" resource="1"
@@ -205,7 +205,7 @@
         <FILE id="Ea9Qtb" name="ride-cymbal-snare-mic.wav" compile="0" resource="1"
               file="Samples/ride-cymbal/ride-cymbal-snare-mic.wav"/>
       </GROUP>
-      <GROUP id="{B998FABE-E433-0A6C-F55F-157DA44C0277}" name="side-stick">
+      <GROUP id="{B998FABE-E433-0A6C-F55F-157DA44C0277}" name="sidestick">
         <FILE id="IVQE2n" name="side-stick-floortom-mic.wav" compile="0" resource="1"
               file="Samples/side-stick/side-stick-floortom-mic.wav"/>
         <FILE id="lnXmXO" name="side-stick-hihat-mic.wav" compile="0" resource="1"
@@ -228,6 +228,10 @@
       <FILE id="GpvCpz" name="DrumSample.cpp" compile="1" resource="0" file="Source/DrumSample.cpp"/>
       <FILE id="livqho" name="DrumSample.h" compile="0" resource="0" file="Source/DrumSample.h"/>
       <GROUP id="{53824F92-C2BF-B335-4DAF-BF3BE0EAB6ED}" name="Components">
+        <FILE id="pR9HOj" name="PanningComponent.cpp" compile="1" resource="0"
+              file="Source/Components/PanningComponent.cpp"/>
+        <FILE id="xU5sS8" name="PanningComponent.h" compile="0" resource="0"
+              file="Source/Components/PanningComponent.h"/>
         <FILE id="y2sYsj" name="MainComponent.cpp" compile="1" resource="0"
               file="Source/Components/MainComponent.cpp"/>
         <FILE id="eNoX7i" name="MainComponent.h" compile="0" resource="0" file="Source/Components/MainComponent.h"/>

@@ -58,10 +58,8 @@ public:
 
 	//===    
 	void noteOnSynthesiser(int midiNoteNumber);
-	std::vector< std::vector<std::atomic<float>*>> getSampleGains();
+	std::vector< std::vector<juce::RangedAudioParameter*>> getSampleGains();
 
-
-private:
 	std::atomic<bool> mShouldUpdate{ false };
 	std::atomic<bool> mIsNotePlayed{ false };
 	juce::Synthesiser mKickMicSynthesiser;
@@ -75,119 +73,126 @@ private:
 	juce::AudioFormatManager mFormatManager;
 	std::atomic<int> mSampleCount{ 0 };
 
-	juce::AudioProcessorValueTreeState mParameters;
+	juce::AudioProcessorValueTreeState mParameterValueTreeState;
 
-	std::atomic<float>* mKickInKickMicGain = nullptr;
-	std::atomic<float>* mKickInSnareMicGain = nullptr;
-	std::atomic<float>* mKickInHiHatMicGain = nullptr;
-	std::atomic<float>* mKickInRackTomMicGain = nullptr;
-	std::atomic<float>* mKickInFloorTomMicGain = nullptr;
-	std::atomic<float>* mKickInRideMicGain = nullptr;
-	std::atomic<float>* mKickInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mKickInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mKickMicPanning = nullptr;
+	juce::RangedAudioParameter* mSnareMicPanning = nullptr;
+	juce::RangedAudioParameter* mHiHatMicPanning = nullptr;
+	juce::RangedAudioParameter* mRackTomMicPanning = nullptr;
+	juce::RangedAudioParameter* mFloorTomMicPanning = nullptr;
+	juce::RangedAudioParameter* mRideMicPanning = nullptr;
+	juce::RangedAudioParameter* mOverheadLeftMicPanning = nullptr;
+	juce::RangedAudioParameter* mOverheadRightMicPanning = nullptr;
 
-	std::atomic<float>* mSnareInKickMicGain = nullptr;
-	std::atomic<float>* mSnareInSnareMicGain = nullptr;
-	std::atomic<float>* mSnareInHiHatMicGain = nullptr;
-	std::atomic<float>* mSnareInRackTomMicGain = nullptr;
-	std::atomic<float>* mSnareInFloorTomMicGain = nullptr;
-	std::atomic<float>* mSnareInRideMicGain = nullptr;
-	std::atomic<float>* mSnareInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mSnareInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mKickInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mSideStickInKickMicGain = nullptr;
-	std::atomic<float>* mSideStickInSnareMicGain = nullptr;
-	std::atomic<float>* mSideStickInHiHatMicGain = nullptr;
-	std::atomic<float>* mSideStickInRackTomMicGain = nullptr;
-	std::atomic<float>* mSideStickInFloorTomMicGain = nullptr;
-	std::atomic<float>* mSideStickInRideMicGain = nullptr;
-	std::atomic<float>* mSideStickInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mSideStickInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mSnareInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mPedalHiHatInKickMicGain = nullptr;
-	std::atomic<float>* mPedalHiHatInSnareMicGain = nullptr;
-	std::atomic<float>* mPedalHiHatInHiHatMicGain = nullptr;
-	std::atomic<float>* mPedalHiHatInRackTomMicGain = nullptr;
-	std::atomic<float>* mPedalHiHatInFloorTomMicGain = nullptr;
-	std::atomic<float>* mPedalHiHatInRideMicGain = nullptr;
-	std::atomic<float>* mPedalHiHatInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mPedalHiHatInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mSideStickInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mClosedHiHatInKickMicGain = nullptr;
-	std::atomic<float>* mClosedHiHatInSnareMicGain = nullptr;
-	std::atomic<float>* mClosedHiHatInHiHatMicGain = nullptr;
-	std::atomic<float>* mClosedHiHatInRackTomMicGain = nullptr;
-	std::atomic<float>* mClosedHiHatInFloorTomMicGain = nullptr;
-	std::atomic<float>* mClosedHiHatInRideMicGain = nullptr;
-	std::atomic<float>* mClosedHiHatInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mClosedHiHatInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mPedalHiHatInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mOpenHiHatInKickMicGain = nullptr;
-	std::atomic<float>* mOpenHiHatInSnareMicGain = nullptr;
-	std::atomic<float>* mOpenHiHatInHiHatMicGain = nullptr;
-	std::atomic<float>* mOpenHiHatInRackTomMicGain = nullptr;
-	std::atomic<float>* mOpenHiHatInFloorTomMicGain = nullptr;
-	std::atomic<float>* mOpenHiHatInRideMicGain = nullptr;
-	std::atomic<float>* mOpenHiHatInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mOpenHiHatInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mClosedHiHatInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mRackTomInKickMicGain = nullptr;
-	std::atomic<float>* mRackTomInSnareMicGain = nullptr;
-	std::atomic<float>* mRackTomInHiHatMicGain = nullptr;
-	std::atomic<float>* mRackTomInRackTomMicGain = nullptr;
-	std::atomic<float>* mRackTomInFloorTomMicGain = nullptr;
-	std::atomic<float>* mRackTomInRideMicGain = nullptr;
-	std::atomic<float>* mRackTomInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mRackTomInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mOpenHiHatInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mFloorTomInKickMicGain = nullptr;
-	std::atomic<float>* mFloorTomInSnareMicGain = nullptr;
-	std::atomic<float>* mFloorTomInHiHatMicGain = nullptr;
-	std::atomic<float>* mFloorTomInRackTomMicGain = nullptr;
-	std::atomic<float>* mFloorTomInFloorTomMicGain = nullptr;
-	std::atomic<float>* mFloorTomInRideMicGain = nullptr;
-	std::atomic<float>* mFloorTomInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mFloorTomInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mRackTomInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mRideBellInKickMicGain = nullptr;
-	std::atomic<float>* mRideBellInSnareMicGain = nullptr;
-	std::atomic<float>* mRideBellInHiHatMicGain = nullptr;
-	std::atomic<float>* mRideBellInRackTomMicGain = nullptr;
-	std::atomic<float>* mRideBellInFloorTomMicGain = nullptr;
-	std::atomic<float>* mRideBellInRideMicGain = nullptr;
-	std::atomic<float>* mRideBellInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mRideBellInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mFloorTomInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mRideCymbalInKickMicGain = nullptr;
-	std::atomic<float>* mRideCymbalInSnareMicGain = nullptr;
-	std::atomic<float>* mRideCymbalInHiHatMicGain = nullptr;
-	std::atomic<float>* mRideCymbalInRackTomMicGain = nullptr;
-	std::atomic<float>* mRideCymbalInFloorTomMicGain = nullptr;
-	std::atomic<float>* mRideCymbalInRideMicGain = nullptr;
-	std::atomic<float>* mRideCymbalInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mRideCymbalInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mRideBellInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mCrashCymbal1InKickMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal1InSnareMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal1InHiHatMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal1InRackTomMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal1InFloorTomMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal1InRideMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal1InOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal1InOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mRideCymbalInOverheadRightMicGain = nullptr;
 
-	std::atomic<float>* mCrashCymbal2InInKickMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal2InInSnareMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal2InInHiHatMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal2InInRackTomMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal2InInFloorTomMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal2InInRideMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal2InInOverheadLeftMicGain = nullptr;
-	std::atomic<float>* mCrashCymbal2InInOverheadRightMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InKickMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InRideMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal1InOverheadRightMicGain = nullptr;
 
+	juce::RangedAudioParameter* mCrashCymbal2InInKickMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal2InInSnareMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal2InInHiHatMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal2InInRackTomMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal2InInFloorTomMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal2InInRideMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal2InInOverheadLeftMicGain = nullptr;
+	juce::RangedAudioParameter* mCrashCymbal2InInOverheadRightMicGain = nullptr;
 
-	std::vector< std::vector<std::atomic<float>*>> mSampleGains = {};
-
+	std::vector< std::vector<juce::RangedAudioParameter*>> mSampleGains = {};
 
 	//==============================================================================
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AcresBasementKitAudioProcessor)

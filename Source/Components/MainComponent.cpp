@@ -37,6 +37,7 @@ MainComponent::MainComponent ()
     juce__tabbedComponent->setTabBarDepth (30);
     juce__tabbedComponent->addTab (TRANS("Drums"), juce::Colours::lightgrey, new DrumComponent(), true);
     juce__tabbedComponent->addTab (TRANS("Mixer"), juce::Colours::lightgrey, new MixerComponent(), true);
+    juce__tabbedComponent->addTab (TRANS("Panning"), juce::Colours::lightgrey, new PanningComponent(), true);
     juce__tabbedComponent->setCurrentTabIndex (0);
 
 
@@ -96,6 +97,10 @@ MixerComponent* MainComponent::getMixerComponent() {
     return static_cast<MixerComponent*>(juce__tabbedComponent->getTabContentComponent(1));
 }
 
+PanningComponent* MainComponent::getPanningComponent() {
+    return static_cast<PanningComponent*>(juce__tabbedComponent->getTabContentComponent(2));
+}
+
 //[/MiscUserCode]
 
 
@@ -119,6 +124,8 @@ BEGIN_JUCER_METADATA
     <TAB name="Drums" colour="ffd3d3d3" useJucerComp="0" contentClassName="DrumComponent"
          constructorParams="" jucerComponentFile=""/>
     <TAB name="Mixer" colour="ffd3d3d3" useJucerComp="0" contentClassName="MixerComponent"
+         constructorParams="" jucerComponentFile=""/>
+    <TAB name="Panning" colour="ffd3d3d3" useJucerComp="0" contentClassName="PanningComponent"
          constructorParams="" jucerComponentFile=""/>
   </TABBEDCOMPONENT>
 </JUCER_COMPONENT>

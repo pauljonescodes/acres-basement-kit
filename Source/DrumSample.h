@@ -37,7 +37,8 @@ public:
 	DrumSamplerSound(const juce::String& soundName,
 		juce::AudioFormatReader& source,
 		const juce::BigInteger& notes,
-		std::atomic<float>* gain,
+		juce::RangedAudioParameter* gain,
+		juce::RangedAudioParameter* panning,
 		int midiNoteForNormalPitch,
 		double attackTimeSecs,
 		double releaseTimeSecs,
@@ -54,13 +55,7 @@ public:
 		This could return nullptr if there was a problem loading the data.
 	*/
 	juce::AudioBuffer<float>* getAudioData() const noexcept { return data.get(); }
-	float getGain() const noexcept {
-		if (mGain != nullptr) {
-			return *mGain;
-		}
 
-		return 1;
-	}
 
 	//==============================================================================
 	/** Changes the parameters of the ADSR envelope which will be applied to the sample. */
@@ -69,6 +64,9 @@ public:
 	//==============================================================================
 	bool appliesToNote(int midiNoteNumber) override;
 	bool appliesToChannel(int midiChannel) override;
+
+	juce::RangedAudioParameter* mGainParameter;
+	juce::RangedAudioParameter* mPanningParameter;
 
 private:
 	//==============================================================================
@@ -80,7 +78,7 @@ private:
 	juce::BigInteger midiNotes;
 	int length = 0;
 	int midiRootNote = 0;
-	std::atomic<float>* mGain;
+	
 
 	juce::ADSR::Parameters params;
 

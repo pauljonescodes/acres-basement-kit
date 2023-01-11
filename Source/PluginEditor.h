@@ -26,11 +26,13 @@ public:
 	void resized() override;
 	bool isResizable() const noexcept { return true; }
 
+	AcresBasementKitAudioProcessor& audioProcessor;
+	MainComponent mMainComponent;
+
 private:
 	// This reference is provided as a quick way for your editor to
 	// access the processor object that created it.
-	AcresBasementKitAudioProcessor& audioProcessor;
-	MainComponent mMainComponent;
+	
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AcresBasementKitAudioProcessorEditor)
 };

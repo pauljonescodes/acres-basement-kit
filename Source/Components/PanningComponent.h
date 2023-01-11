@@ -33,18 +33,16 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class MixerComponent  : public juce::Component,
-                        public juce::Slider::Listener,
-                        public juce::ComboBox::Listener
+class PanningComponent  : public juce::Component,
+                          public juce::Slider::Listener
 {
 public:
     //==============================================================================
-    MixerComponent ();
-    ~MixerComponent() override;
+    PanningComponent ();
+    ~PanningComponent() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    void setOnInstrumentChanged(std::optional<std::function<void(int)>> callback);
     void attachKickSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID);
     void attachSnareSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID);
     void attachHiHatSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID);
@@ -53,12 +51,12 @@ public:
     void attachRideSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID);
     void attachOverheadLeftSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID);
     void attachOverheadRightSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID);
+
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
     void resized() override;
     void sliderValueChanged (juce::Slider* sliderThatWasMoved) override;
-    void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
 
 
 
@@ -72,31 +70,29 @@ private:
     juce::Value mRideValue;
     juce::Value mOverheadLeftValue;
     juce::Value mOverheadRightValue;
-    std::optional<std::function<void(int)>> mOnInstrumentChanged;
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<juce::Slider> juce__kickGainSlider;
-    std::unique_ptr<juce::ComboBox> juce__instrumentComboBox;
-    std::unique_ptr<juce::Slider> juce__snareGainSlider;
-    std::unique_ptr<juce::Slider> juce__hiHatGainSlider;
-    std::unique_ptr<juce::Slider> juce__floorTomGainSlider;
-    std::unique_ptr<juce::Slider> juce__rackTomGainSlider;
-    std::unique_ptr<juce::Slider> juce__rideGainSlider;
-    std::unique_ptr<juce::Slider> juce__overheadLeftGainSlider;
-    std::unique_ptr<juce::Slider> juce__overheadRightGainSlider;
-    std::unique_ptr<juce::Label> juce__labelKick;
-    std::unique_ptr<juce::Label> juce__labelSnare;
-    std::unique_ptr<juce::Label> juce__labelHiHat;
-    std::unique_ptr<juce::Label> juce__labelFloorTom;
-    std::unique_ptr<juce::Label> juce__labelRackTom;
-    std::unique_ptr<juce::Label> juce__labelRide;
-    std::unique_ptr<juce::Label> juce__labelOverheadLeft;
-    std::unique_ptr<juce::Label> juce__labelOverheadRight;
+    std::unique_ptr<juce::Slider> juce__kickPanSlider;
+    std::unique_ptr<juce::Label> juce__kickLabel;
+    std::unique_ptr<juce::Slider> juce__snarePanSlider;
+    std::unique_ptr<juce::Label> juce__snareLabel;
+    std::unique_ptr<juce::Slider> juce__hihatPanSlider;
+    std::unique_ptr<juce::Label> juce__hihatLabel;
+    std::unique_ptr<juce::Slider> juce__rackTomPanSlider;
+    std::unique_ptr<juce::Label> juce__rackTomLabel;
+    std::unique_ptr<juce::Slider> juce__floorTomPanSlider;
+    std::unique_ptr<juce::Label> juce__floorTomLabel;
+    std::unique_ptr<juce::Slider> juce__ridePanSlider;
+    std::unique_ptr<juce::Label> juce__rideLabel;
+    std::unique_ptr<juce::Slider> juce__overheadLeftPanSlider;
+    std::unique_ptr<juce::Label> juce__overheadLeftLabel;
+    std::unique_ptr<juce::Slider> juce__overheadRightPanSlider;
+    std::unique_ptr<juce::Label> juce__overheadRightLabel;
 
 
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MixerComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PanningComponent)
 };
 
 //[EndFile] You can add extra defines here...

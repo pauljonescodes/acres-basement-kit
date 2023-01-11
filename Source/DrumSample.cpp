@@ -13,7 +13,8 @@
 DrumSamplerSound::DrumSamplerSound(const juce::String& soundName,
     juce::AudioFormatReader& source,
     const juce::BigInteger& notes,
-    std::atomic<float>* gain,
+    juce::RangedAudioParameter* gainParameter,
+    juce::RangedAudioParameter* panningParameter,
     int midiNoteForNormalPitch,
     double attackTimeSecs,
     double releaseTimeSecs,
@@ -33,7 +34,8 @@ DrumSamplerSound::DrumSamplerSound(const juce::String& soundName,
 
         params.attack = static_cast<float> (attackTimeSecs);
         params.release = static_cast<float> (releaseTimeSecs);
-        mGain = gain;
+        mGainParameter = gainParameter;
+        mPanningParameter = panningParameter;
     }
 }
 
@@ -68,8 +70,6 @@ void DrumSamplerVoice::startNote(int midiNoteNumber, float velocity, juce::Synth
             * sound->sourceSampleRate / getSampleRate();
 
         mSourceSamplePosition = 0.0;
-        mLeftGain = velocity;
-        mRightGain = velocity;
 
         adsr.setSampleRate(sound->sourceSampleRate);
         adsr.setParameters(sound->params);
@@ -104,9 +104,11 @@ void DrumSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, i
     if (auto* playingSound = static_cast<DrumSamplerSound*> (getCurrentlyPlayingSound().get()))
     {
         auto& data = *playingSound->data;
-        const float* const in = data.getReadPointer(0);
+        const float* const inL = data.getReadPointer(0);
+        const float* const inR = data.getNumChannels() > 1 ? data.getReadPointer(1) : nullptr;
 
-        float* out = outputBuffer.getWritePointer(0, startSample);
+        float* outL = outputBuffer.getWritePointer(0, startSample);
+        float* outR = outputBuffer.getNumChannels() > 1 ? outputBuffer.getWritePointer(1, startSample) : nullptr;
 
         while (--numSamples >= 0)
         {
@@ -115,13 +117,30 @@ void DrumSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, i
             auto invAlpha = 1.0f - alpha;
 
             // just using a very simple linear interpolation here..
-            float magic = (in[pos] * invAlpha + in[pos + 1] * alpha);
+            float l = (inL[pos] * invAlpha + inL[pos + 1] * alpha);
+            float r = (inR != nullptr) ? (inR[pos] * invAlpha + inR[pos + 1] * alpha)
+                : l;
 
             auto envelopeValue = adsr.getNextSample();
 
-            magic *= playingSound->getGain() * envelopeValue;
+            auto sampleGain = playingSound->mGainParameter->getValue();
+            auto pan = playingSound->mPanningParameter->getValue();
 
-            *out++ += (magic);
+            auto lGain = sampleGain * (1 - pan);
+            auto rGain = sampleGain * pan;
+
+            l *= lGain * envelopeValue;
+            r *= rGain * envelopeValue;
+
+            if (outR != nullptr)
+            {
+                *outL++ += l;
+                *outR++ += r;
+            }
+            else
+            {
+                *outL++ += (l + r) * 0.5f;
+            }
 
             mSourceSamplePosition += mPitchRatio;
 

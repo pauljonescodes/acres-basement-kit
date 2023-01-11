@@ -45,7 +45,7 @@ MixerComponent::MixerComponent ()
     addAndMakeVisible (juce__instrumentComboBox.get());
     juce__instrumentComboBox->setEditableText (false);
     juce__instrumentComboBox->setJustificationType (juce::Justification::centredLeft);
-    juce__instrumentComboBox->setTextWhenNothingSelected (TRANS("Snare"));
+    juce__instrumentComboBox->setTextWhenNothingSelected (TRANS("select sample"));
     juce__instrumentComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     juce__instrumentComboBox->addItem (TRANS("snare"), 1);
     juce__instrumentComboBox->addItem (TRANS("kick"), 2);
@@ -222,6 +222,7 @@ MixerComponent::MixerComponent ()
 
 
     //[Constructor] You can add your own custom stuff here..
+
     //[/Constructor]
 }
 
@@ -282,49 +283,49 @@ void MixerComponent::sliderValueChanged (juce::Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == juce__kickGainSlider.get())
     {
         //[UserSliderCode_juce__kickGainSlider] -- add your slider handling code here..
-        *mGains[0] = (float)sliderThatWasMoved->getValue();
+        mKickValue = juce__kickGainSlider->getValue();
         //[/UserSliderCode_juce__kickGainSlider]
     }
     else if (sliderThatWasMoved == juce__snareGainSlider.get())
     {
         //[UserSliderCode_juce__snareGainSlider] -- add your slider handling code here..
-        *mGains[1] = (float)sliderThatWasMoved->getValue();
+        mSnareValue = juce__snareGainSlider->getValue();
         //[/UserSliderCode_juce__snareGainSlider]
     }
     else if (sliderThatWasMoved == juce__hiHatGainSlider.get())
     {
         //[UserSliderCode_juce__hiHatGainSlider] -- add your slider handling code here..
-        *mGains[2] = (float)sliderThatWasMoved->getValue();
+        mHiHatValue = juce__hiHatGainSlider->getValue();
         //[/UserSliderCode_juce__hiHatGainSlider]
     }
     else if (sliderThatWasMoved == juce__floorTomGainSlider.get())
     {
         //[UserSliderCode_juce__floorTomGainSlider] -- add your slider handling code here..
-        *mGains[3] = (float)sliderThatWasMoved->getValue();
+        mRackTomValue = juce__floorTomGainSlider->getValue();
         //[/UserSliderCode_juce__floorTomGainSlider]
     }
     else if (sliderThatWasMoved == juce__rackTomGainSlider.get())
     {
         //[UserSliderCode_juce__rackTomGainSlider] -- add your slider handling code here..
-        *mGains[4] = (float)sliderThatWasMoved->getValue();
+        mFloorTomValue = juce__rackTomGainSlider->getValue();
         //[/UserSliderCode_juce__rackTomGainSlider]
     }
     else if (sliderThatWasMoved == juce__rideGainSlider.get())
     {
         //[UserSliderCode_juce__rideGainSlider] -- add your slider handling code here..
-        *mGains[5] = (float)sliderThatWasMoved->getValue();
+        mRideValue = juce__rideGainSlider->getValue();
         //[/UserSliderCode_juce__rideGainSlider]
     }
     else if (sliderThatWasMoved == juce__overheadLeftGainSlider.get())
     {
         //[UserSliderCode_juce__overheadLeftGainSlider] -- add your slider handling code here..
-        *mGains[6] = (float)sliderThatWasMoved->getValue();
+        mOverheadLeftValue = juce__overheadLeftGainSlider->getValue();
         //[/UserSliderCode_juce__overheadLeftGainSlider]
     }
     else if (sliderThatWasMoved == juce__overheadRightGainSlider.get())
     {
         //[UserSliderCode_juce__overheadRightGainSlider] -- add your slider handling code here..
-        *mGains[7] = (float)sliderThatWasMoved->getValue();
+        mOverheadRightValue = juce__overheadRightGainSlider->getValue();
         //[/UserSliderCode_juce__overheadRightGainSlider]
     }
 
@@ -357,18 +358,43 @@ void MixerComponent::setOnInstrumentChanged(std::optional<std::function<void(int
     mOnInstrumentChanged = callback;
 }
 
-void  MixerComponent::setGains(std::vector<std::atomic<float>*> gains) {
-    mGains = gains;
+void MixerComponent::attachKickSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mKickValue = stateToUse.getParameterAsValue(parameterID);
+    juce__kickGainSlider->setValue(mKickValue.getValue(), juce::dontSendNotification);
+}
+void MixerComponent::attachSnareSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mSnareValue = stateToUse.getParameterAsValue(parameterID);
+    juce__snareGainSlider->setValue(mSnareValue.getValue(), juce::dontSendNotification);
+}
 
-    if (mGains[0] == nullptr) { return; }
-    juce__kickGainSlider->setValue(*mGains[0]);
-    juce__snareGainSlider->setValue(*mGains[1]);
-    juce__hiHatGainSlider->setValue(*mGains[2]);
-    juce__rackTomGainSlider->setValue(*mGains[3]);
-    juce__floorTomGainSlider->setValue(*mGains[4]);
-    juce__rideGainSlider->setValue(*mGains[5]);
-    juce__overheadLeftGainSlider->setValue(*mGains[6]);
-    juce__overheadRightGainSlider->setValue(*mGains[7]);
+void MixerComponent::attachHiHatSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mHiHatValue = stateToUse.getParameterAsValue(parameterID);
+    juce__hiHatGainSlider->setValue(mHiHatValue.getValue(), juce::dontSendNotification);
+}
+
+void MixerComponent::attachRackTomSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mRackTomValue = stateToUse.getParameterAsValue(parameterID);
+    juce__floorTomGainSlider->setValue(mRackTomValue.getValue(), juce::dontSendNotification);
+}
+
+void MixerComponent::attachFloorTomSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mFloorTomValue = stateToUse.getParameterAsValue(parameterID);
+    juce__rackTomGainSlider->setValue(mFloorTomValue.getValue(), juce::dontSendNotification);
+}
+
+void MixerComponent::attachRideSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mRideValue = stateToUse.getParameterAsValue(parameterID);
+    juce__rideGainSlider->setValue(mRideValue.getValue(), juce::dontSendNotification);
+}
+
+void MixerComponent::attachOverheadLeftSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mOverheadLeftValue = stateToUse.getParameterAsValue(parameterID);
+    juce__overheadLeftGainSlider->setValue(mOverheadLeftValue.getValue(), juce::dontSendNotification);
+}
+
+void MixerComponent::attachOverheadRightSlider(juce::AudioProcessorValueTreeState& stateToUse, const juce::String& parameterID) {
+    mOverheadRightValue = stateToUse.getParameterAsValue(parameterID);
+    juce__overheadRightGainSlider->setValue(mOverheadRightValue.getValue(), juce::dontSendNotification);
 }
 
 //[/MiscUserCode]
@@ -396,7 +422,7 @@ BEGIN_JUCER_METADATA
   <COMBOBOX name="new combo box" id="617b4cb1f261989a" memberName="juce__instrumentComboBox"
             virtualName="" explicitFocusOrder="0" pos="8 8 150 24" editable="0"
             layout="33" items="snare&#10;kick&#10;closedHiHat&#10;crashCymbal1&#10;crashCymbal2In&#10;floorTom&#10;openHiHat&#10;pedalHiHat&#10;rackTom&#10;rideBell&#10;rideCymbal&#10;sideStick"
-            textWhenNonSelected="Snare" textWhenNoItems="(no choices)"/>
+            textWhenNonSelected="select sample" textWhenNoItems="(no choices)"/>
   <SLIDER name="new slider" id="3d2d101604db757c" memberName="juce__snareGainSlider"
           virtualName="" explicitFocusOrder="0" pos="64 32 30 453" min="0.0"
           max="1.0" int="0.01" style="LinearVertical" textBoxPos="TextBoxBelow"
